@@ -1,0 +1,30 @@
+/*
+ * Positions.h
+ *
+ *  Created on: Mar 31, 2016
+ *      Author: Ryan McHale
+ */
+
+#ifndef SRC_POSITIONS_H_
+#define SRC_POSITIONS_H_
+
+#define ARM_FLOOR_POSITION -123.03 //Arm encoder positions
+#define ARM_TRAVERSE_TO_PICKUP -300
+//#define ARM_TRAVERSE_POSITION -240//-212.5
+#define ARM_PORT_POSITION -300
+#define ARM_SHOOT_POSITION -639
+#define PRE_CLIMB_POSITION -700
+#define ARM_CLIMB_POSITION -768.8
+#define ARM_LOW_GOAL_POSITION -119.0
+
+#define ARM_RETURN_TOLERENCE 5
+															//4.5  5.454
+#define WINCH_PORT_POSITION 5950
+#define WINCH_FASTCLIMB_POSITION 8000
+#define WINCH_ZERO_POSITION 1300
+#define WINCH_SNAP_POSITION 2600
+#define WINCH_CLIMB_POSITION -22000
+
+#define WINCH_RETURN_TOLERENCE 80
+
+#endif /* SRC_POSITIONS_H_ */
