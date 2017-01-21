@@ -263,7 +263,7 @@ public:
 
 		while(IsAutonomous() && IsEnabled())
 		{
-			if(!table.get() == NULL)
+	/*		if(!table.get() == NULL)
 			{
 				table = NetworkTable::GetTable("GRIP/myContoursReport");
 				centerX = table->GetNumberArray("centerX", llvm::ArrayRef<double>());
@@ -273,7 +273,7 @@ public:
 					double centerXD = centerX[0];
 					double areaD = area[0];
 				}
-			}
+			}*/
 			
 			if(!hasDrivenForward)
 			{
@@ -557,7 +557,7 @@ public:
 				else if(!(r_stick.GetRawButton(9) || r_stick.GetRawButton(10)))
 					TankDrive();
 
-				if(!(A11 || R11 || A12) { // If Not PickUp, Shoot, or Tracking
+				if(!(A11 || R11 || A12)) { // If Not PickUp, Shoot, or Tracking
 					ROLLERS(Set(0));
 				}
 
@@ -573,7 +573,6 @@ public:
 					FollowMe();
 				} */
 
-	\
 	/*
 	#ifdef ARM_JOYSTICK_CONTROL
 				a_motor6.Set(a_stick.GetY());		//If DEBUG, then control arm with a_stick
