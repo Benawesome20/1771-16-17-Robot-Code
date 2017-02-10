@@ -8,17 +8,18 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <WPILib.h>
 #include <CANTalon.h>
-#include "DriveTrain.h"
+#include <RoboBase.h>
 #include "Transmission.h"
 #include "Buttons.h"
+#include "Pixy.h"
 
 
 class Robot: public frc::IterativeRobot {
 public:
 
 	void RobotInit() {
-		drive_train.StopMotors();
-		drive_train.Reset();
+		bot.StopMotors();
+		bot.Reset();
 		chooser.AddDefault(autoNameDefault, autoNameDefault);
 		chooser.AddObject(autoNameCustom, autoNameCustom);
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
@@ -60,7 +61,8 @@ public:
 	}
 
 	void TeleopPeriodic() {
-		drive_train.TankDrive();
+		bot.TankDrive();
+		bot.AutoShift();
 	}
 
 	void TestPeriodic() {
@@ -79,7 +81,7 @@ private:
 //	CANTalon r_motor {5};
 //	Encoder  l_drive {0,1};
 //	Encoder  r_drive {2,3};
-	DriveTrain drive_train {3, 5, 0, 1, 2, 3, 0, 1};
+	RoboBase bot {3, 5, 0, 1, 2, 3, 0, 0, 1};
 };
 
 START_ROBOT_CLASS(Robot)

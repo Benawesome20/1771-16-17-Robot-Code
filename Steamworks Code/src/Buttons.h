@@ -8,7 +8,7 @@
 #ifndef SRC_BUTTONS_H_
 #define SRC_BUTTONS_H_
 
-#define LS(x) l_stick.GetRawButton(x)	// Left joystick buttons
+#define LS(x) bot.GetLeftButton(x)	// Left joystick buttons
 #define L1 LS(1)
 #define L2 LS(2)
 #define L3 LS(3)
@@ -21,7 +21,7 @@
 #define L10 LS(10)
 #define L11 LS(11)
 
-#define RS(x) r_stick.GetRawButton(x)	// Right joystick buttons
+#define RS(x) bot.GetRightButton(x)	// Right joystick buttons
 #define R1 RS(1)
 #define R2 RS(2)
 #define R3 RS(3)
@@ -34,7 +34,7 @@
 #define R10 RS(10)
 #define R11 RS(11)
 
-#define TS(x) t_stick.GetRawButton(x)	// Turret joystick buttons
+#define TS(x) balls.GetButton(x)	// Turret joystick buttons
 #define T1 TS(1)
 #define T2 TS(2)
 #define T3 TS(3)

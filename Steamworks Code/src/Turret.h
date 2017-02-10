@@ -11,6 +11,7 @@
 #include <WPILib.h>
 #include <CANTalon.h>
 #include "Transmission.h"
+#include "Pixy.h"
 
 class Turret {
 	Transmission t_motor;
@@ -27,7 +28,7 @@ public:
 
 	double GetRotation()
 	{
-		return 0;
+		return t_motor.GetDistance() % 360; //TEST PLS
 	}
 
 	double GetHeight()
