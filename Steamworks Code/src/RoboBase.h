@@ -1,5 +1,5 @@
 /*
- * DriveTrain.h
+ * RoboBase.h
  *
  *  Created on: January 21, 2017
  *      Author: Benjamin Ventimiglia
@@ -23,13 +23,15 @@ class RoboBase {
 	Pixy gear_cam;
 
 public:
-	RoboBase(int lmotor_port, int rmotor_port, int lencoder_channel1, int lencoder_channel2, int rencoder_channel1, int rencoder_channel2, int shift_port, int lstick_port, int rstick_port):
-		l_motor(lmotor_port, lencoder_channel1, lencoder_channel2),
-		r_motor(rmotor_port, rencoder_channel1, rencoder_channel2),
+	RoboBase(int lmotor_port,int lmotor_port2, int rmotor_port, int rmotor_port2,
+			 int lencoder_channel1, int lencoder_channel2, int rencoder_channel1, int rencoder_channel2,
+			 int shift_port, int lstick_port, int rstick_port, int detect_port, int offset_port):
+		l_motor(lmotor_port, lmotor_port2, lencoder_channel1, lencoder_channel2),
+		r_motor(rmotor_port, rmotor_port2, rencoder_channel1, rencoder_channel2),
 		shift(shift_port),
 		l_stick(lstick_port),
 		r_stick(rstick_port),
-		gear_cam(1, 3)
+		gear_cam(detect_port, offset_port)
     {
 	}
 
@@ -142,11 +144,11 @@ public:
 				if(fabs(r_motor.GetDistance()) > fabs(l_motor.GetDistance()) + 0.1)
 				{
 						r_motor.Set(speed * .75);
-						l_motor.Set(-1);
+						l_motor.Set(-speed);
 				}
 				else if(fabs(r_motor.GetDistance()) + 0.1 < fabs(l_motor.GetDistance()))
 				{
-						r_motor.Set(1);
+						r_motor.Set(speed);
 						l_motor.Set(speed * -.75);
 				}
 				else

@@ -62,7 +62,20 @@ public:
 
 	void TeleopPeriodic() {
 		bot.TankDrive();
-		bot.AutoShift();
+		//bot.AutoShift();
+
+		if (L3)
+		{
+			bot.StopMotors();
+		}
+		else if (L4)
+		{
+			bot.TrackHook();
+		}
+		else if (L5)
+		{
+			bot.DriveXDistance(500, 1, 1);
+		}
 	}
 
 	void TestPeriodic() {
@@ -81,7 +94,19 @@ private:
 //	CANTalon r_motor {5};
 //	Encoder  l_drive {0,1};
 //	Encoder  r_drive {2,3};
-	RoboBase bot {3, 5, 0, 1, 2, 3, 0, 0, 1};
+	RoboBase bot {	L_MOTOR_PORT_1,
+					L_MOTOR_PORT_2,
+					R_MOTOR_PORT_1,
+					R_MOTOR_PORT_2,
+					L_ENCODER_CH_1,
+					L_ENCODER_CH_2,
+					R_ENCODER_CH_1,
+					R_ENCODER_CH_2,
+					SHIFT_PORT,
+					L_JOYSTICK_PORT,
+					R_JOYSTICK_PORT,
+					DETECT_PORT,
+					OFFSET_PORT};
 };
 
 START_ROBOT_CLASS(Robot)
