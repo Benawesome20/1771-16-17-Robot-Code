@@ -14,7 +14,8 @@
 class Intake {
 	CANTalon i_motor;
 public:
-	Intake()
+	Intake(int imotor_port):
+		i_motor(imotor_port)
 	{
 	}
 

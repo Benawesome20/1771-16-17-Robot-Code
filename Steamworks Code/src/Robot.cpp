@@ -8,11 +8,15 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <WPILib.h>
 #include <CANTalon.h>
-#include <RoboBase.h>
-#include "Transmission.h"
-#include "Buttons.h"
-#include "Pixy.h"
 
+#include "Balls.h"
+#include "Buttons.h"
+#include "Definitions.h"
+#include "Intake.h"
+#include "Pixy.h"
+#include "RoboBase.h"
+#include "Transmission.h"
+#include "Turret.h"
 
 class Robot: public frc::IterativeRobot {
 public:
@@ -62,7 +66,7 @@ public:
 
 	void TeleopPeriodic() {
 		bot.TankDrive();
-		//bot.AutoShift();
+		bot.AutoShift();
 
 		if (L3)
 		{
@@ -76,10 +80,20 @@ public:
 		{
 			bot.DriveXDistance(500, 1, 1);
 		}
+
 	}
 
 	void TestPeriodic() {
 		lw->Run();
+	}
+
+	void PutNumbers()
+	{
+		SmartDashboard::PutString("DB/String 0", "Camera Offset: " + std::to_string(bot.GetOffSet()));
+		SmartDashboard::PutString("DB/String 1", "Shifter: " + std::to_string(bot.GetShift()));
+		SmartDashboard::PutString("DB/String 2", "Left Distance: " + std::to_string(bot.GetLeftDistance()));
+		SmartDashboard::PutString("DB/String 3", "Right Distance: " + std::to_string(bot.GetRightDistance()));
+		SmartDashboard::PutString("DB/String 4", "Turret Rotation: " + std::to_string(balls.turret.GetRotation()));
 	}
 
 private:
@@ -107,6 +121,17 @@ private:
 					R_JOYSTICK_PORT,
 					DETECT_PORT,
 					OFFSET_PORT};
+
+	Balls balls {	T_MOTOR_PORT,
+		            A_MOTOR_PORT,
+					S_MOTOR_PORT,
+					I_MOTOR_PORT,
+					T_ENCODER_CH_1,
+					T_ENCODER_CH_2,
+					A_ENCODER_CH_1,
+					A_ENCODER_CH_2,
+					S_ENCODER_CH_1,
+					S_ENCODER_CH_2};
 };
 
 START_ROBOT_CLASS(Robot)

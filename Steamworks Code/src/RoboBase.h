@@ -10,7 +10,7 @@
 
 #include <WPILib.h>
 #include <CANTalon.h>
-#include <Definitions.h>
+#include "Definitions.h"
 #include "Transmission.h"
 #include "Pixy.h"
 
@@ -24,15 +24,20 @@ class RoboBase {
 
 public:
 	RoboBase(int lmotor_port,int lmotor_port2, int rmotor_port, int rmotor_port2,
-			 int lencoder_channel1, int lencoder_channel2, int rencoder_channel1, int rencoder_channel2,
+			 int lencoder_1, int lencoder_2, int rencoder_1, int rencoder_2,
 			 int shift_port, int lstick_port, int rstick_port, int detect_port, int offset_port):
-		l_motor(lmotor_port, lmotor_port2, lencoder_channel1, lencoder_channel2),
-		r_motor(rmotor_port, rmotor_port2, rencoder_channel1, rencoder_channel2),
+		l_motor(lmotor_port, lmotor_port2, lencoder_1, lencoder_2),
+		r_motor(rmotor_port, rmotor_port2, rencoder_1, rencoder_2),
 		shift(shift_port),
 		l_stick(lstick_port),
 		r_stick(rstick_port),
 		gear_cam(detect_port, offset_port)
     {
+	}
+
+	double GetOffSet()
+	{
+		return gear_cam.GetOffset();
 	}
 
 	/* Basic tank drive */
@@ -54,6 +59,11 @@ public:
 	void Shift(bool gear)
 	{
 		shift.Set(gear);
+	}
+
+	bool GetShift()
+	{
+		return shift.Get();
 	}
 
 	/* Resets all encoder values */
@@ -122,6 +132,16 @@ public:
 		return fabs(l_motor.GetDistance() + r_motor.GetDistance()) / 2;
 	}
 
+	double GetLeftDistance()
+	{
+		return l_motor.GetDistance();
+	}
+
+	double GetRightDistance()
+	{
+		return r_motor.GetDistance();
+	}
+
 	/* Returns the average speed of the motors */
 	double GetSpeed()
 	{
@@ -149,7 +169,7 @@ public:
 				else if(fabs(r_motor.GetDistance()) + 0.1 < fabs(l_motor.GetDistance()))
 				{
 						r_motor.Set(speed);
-						l_motor.Set(speed * -.75);
+						l_motor.Set(-speed * .75);
 				}
 				else
 				{
