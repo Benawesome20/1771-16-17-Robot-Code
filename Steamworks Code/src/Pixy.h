@@ -12,12 +12,10 @@
 #include <CANTalon.h>
 
 class Pixy {
-	DigitalInput detect;
 	AnalogInput offset;
 
 public:
-	Pixy(int detectCh, int offsetCh):
-		detect(detectCh),
+	Pixy(int offsetCh):
 		offset(offsetCh)
 	{
 	}
@@ -29,22 +27,16 @@ public:
 	 * 			divides by half the total voltage to make the right and left ends 1 and -1 */
 	double GetOffset()
 	{
-		if (detect.Get())
-			return ((double)offset.GetVoltage() - (3.3/2.0) ) / (3.3/2.0);
+		if (offset.GetVoltage())
+			return ((double)offset.GetVoltage() - (3.3/2.0)) / (3.3/2.0);
 		else
-			return -2.0;
+			return 0.0;
 	}
 
 	/* Returns the raw offset data in voltage form, (0V, 3.3V) */
 	double GetRawOffset()
 	{
 		return offset.GetVoltage();
-	}
-
-	/* Returns the raw detect bool, indicating whether the Pixy sees a target */
-	bool GetRawDetect()
-	{
-		return detect.Get();
 	}
 
 };

@@ -37,7 +37,7 @@
 #define L_JOYSTICK_PORT 0
 #define R_JOYSTICK_PORT 1
 
-#define DETECT_PORT 12
+//#define DETECT_PORT 12
 #define OFFSET_PORT 11
 
 #endif /* SRC_DEFINITIONS_H_ */

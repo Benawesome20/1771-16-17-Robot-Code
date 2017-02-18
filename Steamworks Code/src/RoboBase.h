@@ -25,13 +25,13 @@ class RoboBase {
 public:
 	RoboBase(int lmotor_port,int lmotor_port2, int rmotor_port, int rmotor_port2,
 			 int lencoder_1, int lencoder_2, int rencoder_1, int rencoder_2,
-			 int shift_port, int lstick_port, int rstick_port, int detect_port, int offset_port):
+			 int shift_port, int lstick_port, int rstick_port, int offset_port):
 		l_motor(lmotor_port, lmotor_port2, lencoder_1, lencoder_2),
 		r_motor(rmotor_port, rmotor_port2, rencoder_1, rencoder_2),
 		shift(shift_port),
 		l_stick(lstick_port),
 		r_stick(rstick_port),
-		gear_cam(detect_port, offset_port)
+		gear_cam(offset_port)
     {
 	}
 
