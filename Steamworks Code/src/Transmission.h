@@ -64,6 +64,11 @@ public:
 		return encoder.GetDistance();
 	}
 
+	double GetRawEncoderValue()
+	{
+		return encoder.Get();
+	}
+
 	/* Gets the speed of the motor */
 	double GetSpeed()
 	{

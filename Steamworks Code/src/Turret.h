@@ -33,9 +33,14 @@ public:
 	{
 	}
 
-	int GetRotation()
+	int GetAvgRotation()
 	{
 		return (int)t_motor.GetDistance() % 360; //TEST PLS
+	}
+
+	double GetRealRotation()
+	{
+		return t_motor.GetDistance();
 	}
 
 	double GetHeight()
@@ -43,12 +48,14 @@ public:
 		return aim_motor.GetDistance();
 	}
 
-	void SetRotation()
+	void SetRotation(double rate)
 	{
+		t_motor.Set(rate);
 	}
 
-	void SetHeight()
+	void SetHeight(double rate)
 	{
+		aim_motor.Set(rate);
 	}
 
 	void Fire()
@@ -58,6 +65,13 @@ public:
 
 	void StopFire()
 	{
+		shoot_motor.Set(0);
+	}
+
+	void StopAll()
+	{
+		t_motor.Set(0);
+		aim_motor.Set(0);
 		shoot_motor.Set(0);
 	}
 };

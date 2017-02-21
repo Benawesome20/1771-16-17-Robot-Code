@@ -98,6 +98,7 @@ public:
 		else
 		{
 			balls.turret.StopFire();
+			balls.TurretStickDrive();
 		}
 
 		PutNumbers();
@@ -116,7 +117,7 @@ public:
 		SmartDashboard::PutString("DB/String 3", "Left Distance: " + std::to_string((int)bot.GetLeftDistance()));
 		SmartDashboard::PutString("DB/String 4", "Right Distance: " + std::to_string((int)bot.GetRightDistance()));
 		SmartDashboard::PutString("DB/String 5", "Avg Distance: " + std::to_string((int)bot.GetDistance()));
-		SmartDashboard::PutString("DB/String 6", "Turret Rotation: " + std::to_string(balls.turret.GetRotation()));
+		SmartDashboard::PutString("DB/String 6", "Turret Rotation: " + std::to_string(balls.turret.GetAvgRotation()));
 	}
 
 private:

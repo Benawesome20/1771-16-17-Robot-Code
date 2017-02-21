@@ -29,9 +29,32 @@ public:
 	{
 	}
 
-	double GetTurretButton(int butt)
+	bool GetTurretButton(int butt)
 	{
 		return t_stick.GetRawButton(butt);
+	}
+
+	double GetTurretYAxis()
+	{
+		return t_stick.GetY();
+	}
+
+	double GetTurretXAxis()
+	{
+		return t_stick.GetX();
+	}
+
+	void TurretStickDrive()
+	{
+		if(!((turret.GetRealRotation() > 30) || (turret.GetRealRotation() < -30)))
+			turret.SetRotation(t_stick.GetX());
+		else
+			turret.StopAll();
+
+		if(!((turret.GetHeight() > 20) || (turret.GetHeight() < -5)))
+			turret.SetHeight(t_stick.GetY());
+		else
+			turret.StopAll();
 	}
 
 };

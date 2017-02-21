@@ -116,13 +116,13 @@ public:
 	}
 
 	/* Gets the button 'butt' of the left joystick */
-	double GetLeftButton(int butt)
+	bool GetLeftButton(int butt)
 	{
 		return l_stick.GetRawButton(butt);
 	}
 
 	/* Gets the button 'butt' of the right joystick */
-	double GetRightButton(int butt)
+	bool GetRightButton(int butt)
 	{
 		return r_stick.GetRawButton(butt);
 	}
