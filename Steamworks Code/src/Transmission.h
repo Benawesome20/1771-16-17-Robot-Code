@@ -47,6 +47,11 @@ public:
 			motor.Set(rate);
 	}
 
+	void ConfigNeutralMode(CANTalon::NeutralMode mode)
+	{
+		motor.ConfigNeutralMode(mode);
+	}
+
 	/* Resets the encoder value */
 	void Reset()
 	{

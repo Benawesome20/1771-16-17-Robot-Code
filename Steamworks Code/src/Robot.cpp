@@ -65,9 +65,6 @@ public:
 	}
 
 	void TeleopPeriodic() {
-		bot.TankDrive();
-		bot.AutoShift();
-
 		if (L3)
 		{
 			bot.StopMotors();
@@ -78,8 +75,32 @@ public:
 		}
 		else if (L5)
 		{
-			bot.DriveXDistance(500, 1, 1);
+			bot.DriveXDistance(2000, 1, 1);
 		}
+		else if (L6)
+		{
+			bot.SetDist();
+		}
+		else if(L7)
+		{
+			bot.SetCatch(!bot.GetCatch());
+		}
+		else
+		{
+			bot.TankDrive();
+			bot.AutoShift();
+		}
+
+		if(T1)
+		{
+			balls.turret.Fire();
+		}
+		else
+		{
+			balls.turret.StopFire();
+		}
+
+		PutNumbers();
 
 	}
 
@@ -90,10 +111,12 @@ public:
 	void PutNumbers()
 	{
 		SmartDashboard::PutString("DB/String 0", "Camera Offset: " + std::to_string(bot.GetOffSet()));
-		SmartDashboard::PutString("DB/String 1", "Shifter: " + std::to_string(bot.GetShift()));
-		SmartDashboard::PutString("DB/String 2", "Left Distance: " + std::to_string(bot.GetLeftDistance()));
-		SmartDashboard::PutString("DB/String 3", "Right Distance: " + std::to_string(bot.GetRightDistance()));
-		SmartDashboard::PutString("DB/String 4", "Turret Rotation: " + std::to_string(balls.turret.GetRotation()));
+		SmartDashboard::PutString("DB/String 1", "Shifter: " + std::to_string(bot.GetShift()));\
+		SmartDashboard::PutString("DB/String 2", "Gear Catch: " + std::to_string(bot.GetCatch()));
+		SmartDashboard::PutString("DB/String 3", "Left Distance: " + std::to_string((int)bot.GetLeftDistance()));
+		SmartDashboard::PutString("DB/String 4", "Right Distance: " + std::to_string((int)bot.GetRightDistance()));
+		SmartDashboard::PutString("DB/String 5", "Avg Distance: " + std::to_string((int)bot.GetDistance()));
+		SmartDashboard::PutString("DB/String 6", "Turret Rotation: " + std::to_string(balls.turret.GetRotation()));
 	}
 
 private:
@@ -117,9 +140,9 @@ private:
 					R_ENCODER_CH_1,
 					R_ENCODER_CH_2,
 					SHIFT_PORT,
+					GEAR_PORT,
 					L_JOYSTICK_PORT,
 					R_JOYSTICK_PORT,
-					DETECT_PORT,
 					OFFSET_PORT};
 
 	Balls balls {	T_MOTOR_PORT,
@@ -130,8 +153,7 @@ private:
 					T_ENCODER_CH_2,
 					A_ENCODER_CH_1,
 					A_ENCODER_CH_2,
-					S_ENCODER_CH_1,
-					S_ENCODER_CH_2};
+					T_JOYSTICK_PORT};
 };
 
 START_ROBOT_CLASS(Robot)

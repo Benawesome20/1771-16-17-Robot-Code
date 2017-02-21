@@ -14,15 +14,24 @@
 #include "Intake.h"
 
 class Balls {
+	/* Too lazy to create get functions for both the turret and intake,
+	 * so I made them public so I don't have to deal with them */
 public:
 	Turret turret;
 	Intake intake;
+	frc::Joystick t_stick;
 
 	Balls(int tmotor_port, int amotor_port, int smotor_port, int imotor_port, int tencoder_1,
-		  int tencoder_2, int aencoder_1, int aencoder_2, int sencoder_1, int sencoder_2):
-		turret(tmotor_port, amotor_port, smotor_port, tencoder_1, tencoder_2, aencoder_1, aencoder_2, sencoder_1, sencoder_2),
-		intake(imotor_port)
+		  int tencoder_2, int aencoder_1, int aencoder_2, int tstick_port):
+		turret(tmotor_port, amotor_port, smotor_port, tencoder_1, tencoder_2, aencoder_1, aencoder_2),
+		intake(imotor_port),
+		t_stick(tstick_port)
 	{
+	}
+
+	double GetTurretButton(int butt)
+	{
+		return t_stick.GetRawButton(butt);
 	}
 
 };

@@ -18,23 +18,31 @@ class RoboBase {
 	Transmission l_motor;
 	Transmission r_motor;
 	Solenoid shift;
+	Solenoid gear_catch;
 	frc::Joystick l_stick;
 	frc::Joystick r_stick;
 	Pixy gear_cam;
 
+	bool reverse;
+	int reversedone = 50;
+
+	double setDist = 0;
+
 public:
 	RoboBase(int lmotor_port,int lmotor_port2, int rmotor_port, int rmotor_port2,
 			 int lencoder_1, int lencoder_2, int rencoder_1, int rencoder_2,
-			 int shift_port, int lstick_port, int rstick_port, int offset_port):
+			 int shift_port, int gear_port, int lstick_port, int rstick_port, int offset_port):
 		l_motor(lmotor_port, lmotor_port2, lencoder_1, lencoder_2),
 		r_motor(rmotor_port, rmotor_port2, rencoder_1, rencoder_2),
 		shift(shift_port),
+		gear_catch(gear_port),
 		l_stick(lstick_port),
 		r_stick(rstick_port),
 		gear_cam(offset_port)
     {
 	}
 
+	/* Returns offset of camera target from center */
 	double GetOffSet()
 	{
 		return gear_cam.GetOffset();
@@ -42,8 +50,8 @@ public:
 
 	/* Basic tank drive */
 	void TankDrive() {
-		l_motor.Set(-l_stick.GetY());
-		r_motor.Set(r_stick.GetY());
+		l_motor.Set(l_stick.GetY());
+		r_motor.Set(-r_stick.GetY());
 	}
 
 	/* Automatically shifts gears based on average speed of motors */
@@ -61,9 +69,20 @@ public:
 		shift.Set(gear);
 	}
 
+	/* Returns the position of the solenoid for shifting, essentially returns the gear */
 	bool GetShift()
 	{
 		return shift.Get();
+	}
+
+	void SetCatch(bool open)
+	{
+		gear_catch.Set(open);
+	}
+
+	bool GetCatch()
+	{
+		return gear_catch.Get();
 	}
 
 	/* Resets all encoder values */
@@ -80,8 +99,8 @@ public:
 
 	/* Sets all the motors at once */
 	void SetAll(double speed) {
-		l_motor.Set(-speed);
-		r_motor.Set(speed);
+		l_motor.Set(speed);
+		r_motor.Set(-speed);
 	}
 
 	/* Gets the y axis of the left joystick */
@@ -129,23 +148,30 @@ public:
 	/* Finds an average distance between the motors in case of discrepancies */
 	double GetDistance()
 	{
-		return fabs(l_motor.GetDistance() + r_motor.GetDistance()) / 2;
+		return l_motor.GetDistance() - r_motor.GetDistance() / 2;
 	}
 
+	/* Returns the distance that the left motor has traveled */
 	double GetLeftDistance()
 	{
 		return l_motor.GetDistance();
 	}
 
+	/* Returns the distance that the right motor has traveled */
 	double GetRightDistance()
 	{
-		return r_motor.GetDistance();
+		return -r_motor.GetDistance();
 	}
 
 	/* Returns the average speed of the motors */
 	double GetSpeed()
 	{
 		return fabs((l_motor.GetSpeed())-r_motor.GetSpeed()) / 2;
+	}
+
+	void SetDist()
+	{
+		setDist = GetDistance();
 	}
 
 	/* Purpose: Drives in 'dir' direction at 'speed' speed for 'distance' distance
@@ -157,9 +183,9 @@ public:
 	 * 			sets the motors to turn the opposite way
 	 * 			if no discrepancies between right and left, set both motors to the same speed */
 	void DriveXDistance(int distance, int speed, int dir) {
-		int sign = (r_motor.GetDistance()+l_motor.GetDistance())/fabs(r_motor.GetDistance()+l_motor.GetDistance());
-		double pos = sign * GetDistance();
-		if((pos < distance))
+		//int sign = (r_motor.GetDistance()+l_motor.GetDistance())/fabs(r_motor.GetDistance()+l_motor.GetDistance());
+		double pos = /*sign * */ GetDistance() - setDist;
+		if((reverse = pos < distance))
 		{
 				if(fabs(r_motor.GetDistance()) > fabs(l_motor.GetDistance()) + 0.1)
 				{
@@ -177,9 +203,15 @@ public:
 						l_motor.Set(-speed);
 				}
 		}
-		else
+		else if (reversedone <= 0)
 		{
 				StopMotors();
+
+		}
+		else if(!reverse)
+		{
+			SetAll(-0.7);
+			reversedone--;
 		}
 	}
 };

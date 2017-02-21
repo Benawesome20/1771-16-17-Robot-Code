@@ -34,7 +34,7 @@
 #define R10 RS(10)
 #define R11 RS(11)
 
-#define TS(x) balls.GetButton(x)	// Turret joystick buttons
+#define TS(x) balls.GetTurretButton(x)	// Turret joystick buttons
 #define T1 TS(1)
 #define T2 TS(2)
 #define T3 TS(3)
