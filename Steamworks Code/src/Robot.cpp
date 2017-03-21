@@ -106,16 +106,12 @@ public:
 			bot.AutoShift();
 		}
 
-		if(R11)
+		if(T1)
 		{
+			//balls.turret.Fire();
 			bot.SetCatch(1);
 		}else{
 			bot.SetCatch(0);
-		}
-
-		if(T1)
-		{
-			balls.turret.Fire();
 		}
 
 		if(T5)
