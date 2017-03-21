@@ -29,8 +29,8 @@ public:
 		t_motor.ConfigNeutralMode(CANTalon::kNeutralMode_Brake);
 	}
 
-	void Aim()
-	{
+	void Aim(){
+
 	}
 
 	int GetAvgRotation()

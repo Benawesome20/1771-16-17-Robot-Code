@@ -10,6 +10,7 @@
 
 #include <WPILib.h>
 #include <CANTalon.h>
+#include <Climber.h>
 #include "Definitions.h"
 #include "Transmission.h"
 #include "Pixy.h"
@@ -50,8 +51,8 @@ public:
 
 	/* Basic tank drive */
 	void TankDrive() {
-		l_motor.Set(l_stick.GetY());
-		r_motor.Set(-r_stick.GetY());
+		l_motor.Set(GetLeftYAxis());
+		r_motor.Set(-GetRightYAxis());
 	}
 
 	/* Automatically shifts gears based on average speed of motors */
@@ -100,6 +101,14 @@ public:
 	/* Sets all the motors at once */
 	void SetAll(double speed) {
 		l_motor.Set(speed);
+		r_motor.Set(-speed);
+	}
+
+	void SetLeft(double speed){
+		l_motor.Set(speed);
+	}
+
+	void SetRight(double speed){
 		r_motor.Set(-speed);
 	}
 
@@ -182,28 +191,32 @@ public:
 	 * 			checks for discrepancies within 0.1 in left and right encoder distances, indicating the robot is turning
 	 * 			sets the motors to turn the opposite way
 	 * 			if no discrepancies between right and left, set both motors to the same speed */
-	void DriveXDistance(int distance, int speed, int dir) {
+	void DriveXDistance( int speed) {
 		//int sign = (r_motor.GetDistance()+l_motor.GetDistance())/fabs(r_motor.GetDistance()+l_motor.GetDistance());
-		double pos = /*sign * */ GetDistance() - setDist;
-		if((reverse = pos < distance))
-		{
+		//double pos = /*sign * */ GetDistance() - setDist;
+		/*if((reverse = pos < distance))
+		{*/
 				if(fabs(r_motor.GetDistance()) > fabs(l_motor.GetDistance()) + 0.1)
 				{
-						r_motor.Set(speed * .75);
-						l_motor.Set(-speed);
+						r_motor.Set(-speed * .75);
+						l_motor.Set(speed);
+						SmartDashboard::PutString("DB/String 9", "Drive If 1 True");
 				}
 				else if(fabs(r_motor.GetDistance()) + 0.1 < fabs(l_motor.GetDistance()))
 				{
-						r_motor.Set(speed);
-						l_motor.Set(-speed * .75);
+						r_motor.Set(-speed);
+						l_motor.Set(speed * .75);
+						SmartDashboard::PutString("DB/String 9", "Drive If 2 True");
 				}
 				else
 				{
-						r_motor.Set(speed);
-						l_motor.Set(-speed);
+						r_motor.Set(-speed);
+						l_motor.Set(speed);
+						SmartDashboard::PutString("DB/String 9", "DIF: " + std::to_string(speed));
+						//SmartDashboard::PutString("DB/String 10", "DIF Real: " + std::to_string());
 				}
-		}
-		else if (reversedone <= 0)
+		/*}
+		else // (reversedone <= 0)
 		{
 				StopMotors();
 
@@ -212,7 +225,7 @@ public:
 		{
 			SetAll(-0.7);
 			reversedone--;
-		}
+		}*/
 	}
 };
 

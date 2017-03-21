@@ -19,5 +19,10 @@ public:
 	{
 	}
 
+	void Set(double rate)
+	{
+		i_motor.Set(rate);
+	}
+
 };
 #endif /* SRC_INTAKE_H_ */

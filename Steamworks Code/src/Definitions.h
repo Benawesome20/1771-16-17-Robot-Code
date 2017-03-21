@@ -15,10 +15,11 @@
 #define L_MOTOR_PORT_2 2					//Left motor port 2
 #define R_MOTOR_PORT_1 3					//Right motor port 1
 #define R_MOTOR_PORT_2 4					//Right motor port 2
-#define T_MOTOR_PORT   5					//Turret motor port, controls rotation
-#define A_MOTOR_PORT   6					//Aim motor port, controls aiming hood, which controls the height of the shot
-#define S_MOTOR_PORT   7					//Shoot motor port, controls the flywheels
-#define I_MOTOR_PORT   8					//Intake motor port
+#define C_MOTOR_PORT   5					//Climbing motor port
+#define T_MOTOR_PORT   6					//Turret motor port, controls rotation
+#define A_MOTOR_PORT   7					//Aim motor port, controls aiming hood, which controls the height of the shot
+#define S_MOTOR_PORT   8					//Shoot motor port, controls the flywheels
+#define I_MOTOR_PORT   9					//Intake motor port
 
 #define L_ENCODER_CH_1 0					//Left encoder channel 1
 #define L_ENCODER_CH_2 1					//Left encoder channel 2

@@ -8,6 +8,7 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <WPILib.h>
 #include <CANTalon.h>
+#include <Climber.h>
 
 #include "Balls.h"
 #include "Buttons.h"
@@ -41,6 +42,7 @@ public:
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
 	void AutonomousInit() override {
+		bot.Reset();
 		autoSelected = chooser.GetSelected();
 		// std::string autoSelected = SmartDashboard::GetString("Auto Selector", autoNameDefault);
 		std::cout << "Auto selected: " << autoSelected << std::endl;
@@ -56,8 +58,23 @@ public:
 		if (autoSelected == autoNameCustom) {
 			// Custom Auto goes here
 		} else {
-			// Default Auto goes here
+
+			/*if(bot.GetDistance() < 3000){
+				bot.DriveXDistance(.3);
+				SmartDashboard::PutString("DB/String 8", "If Is True");
+			}else{
+				SmartDashboard::PutString("DB/String 3", "If is False");
+				bot.StopMotors();
+			}*/
+
+			if(bot.GetDistance() < 10000){
+				bot.SetRight(.31);
+				bot.SetLeft(.3);
+			}else{
+				bot.StopMotors();
+			}
 		}
+		PutNumbers();
 	}
 
 	void TeleopInit() {
@@ -65,25 +82,21 @@ public:
 	}
 
 	void TeleopPeriodic() {
-		if (L3)
+		if (L7)
 		{
 			bot.StopMotors();
 		}
-		else if (L4)
+		else if (L6)
 		{
 			bot.TrackHook();
 		}
-		else if (L5)
+		else if (L8)
 		{
-			bot.DriveXDistance(2000, 1, 1);
+			//bot.DriveXDistance(2000, 1, 1);
 		}
-		else if (L6)
+		else if (L9)
 		{
 			bot.SetDist();
-		}
-		else if(L7)
-		{
-			bot.SetCatch(!bot.GetCatch());
 		}
 		else
 		{
@@ -91,13 +104,36 @@ public:
 			bot.AutoShift();
 		}
 
+		if(R11)
+		{
+			bot.SetCatch(1);
+		}else{
+			bot.SetCatch(0);
+		}
+
 		if(T1)
 		{
 			balls.turret.Fire();
 		}
+
+		if(T5)
+		{
+			//bot.ClimpUp(50);
+		}
+		else //if(T6)
+		{
+			balls.ManualClimb();
+			//bot.ClearClimbEncoder();
+		}
+
+		if(T3)
+		{
+			balls.SetIntake(1);
+		}
 		else
 		{
-			balls.turret.StopFire();
+			balls.StopTurretFire();
+			balls.SetIntake(0);
 			balls.TurretStickDrive();
 		}
 
@@ -118,6 +154,7 @@ public:
 		SmartDashboard::PutString("DB/String 4", "Right Distance: " + std::to_string((int)bot.GetRightDistance()));
 		SmartDashboard::PutString("DB/String 5", "Avg Distance: " + std::to_string((int)bot.GetDistance()));
 		SmartDashboard::PutString("DB/String 6", "Turret Rotation: " + std::to_string(balls.turret.GetAvgRotation()));
+		SmartDashboard::PutString("DB/String 7", "Climb Encoder: " + std::to_string(balls.GetClimbEncoder()));
 	}
 
 private:
@@ -150,6 +187,7 @@ private:
 		            A_MOTOR_PORT,
 					S_MOTOR_PORT,
 					I_MOTOR_PORT,
+					C_MOTOR_PORT,
 					T_ENCODER_CH_1,
 					T_ENCODER_CH_2,
 					A_ENCODER_CH_1,
