@@ -41,4 +41,24 @@
 
 #define OFFSET_PORT 9						//PixyCam camera port
 
+//Default address of Pixy Camera I2C. You can change the address of the Pixy in Pixymon under setting-> Interface
+#define PIXY_I2C_DEFAULT_ADDR           0x54
+
+// Communication/misc parameters
+#define PIXY_INITIAL_ARRAYSIZE      30
+#define PIXY_MAXIMUM_ARRAYSIZE      130
+#define PIXY_START_WORD             0xaa55 //for regular color recognition
+#define PIXY_START_WORD_CC          0xaa56 //for color code - angle rotation recognition
+#define PIXY_START_WORDX            0x55aa //regular color another way around
+#define PIXY_MAX_SIGNATURE          7
+#define PIXY_DEFAULT_ARGVAL         0xffff
+
+// Pixy x-y position values
+#define PIXY_MIN_X                  0L   //x: 0~319 pixels, y:0~199 pixels. (0,0) starts at bottom left
+#define PIXY_MAX_X                  319L
+#define PIXY_MIN_Y                  0L
+#define PIXY_MAX_Y                  199L
+
+#define BOILER_SIGNATURE			2
+
 #endif /* SRC_DEFINITIONS_H_ */

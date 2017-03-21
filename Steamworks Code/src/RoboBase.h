@@ -14,6 +14,7 @@
 #include "Definitions.h"
 #include "Transmission.h"
 #include "Pixy.h"
+#include "PixyI2C.h"
 
 class RoboBase {
 	Transmission l_motor;
@@ -23,6 +24,7 @@ class RoboBase {
 	frc::Joystick l_stick;
 	frc::Joystick r_stick;
 	Pixy gear_cam;
+	PixyI2C boiler_cam;
 
 	bool reverse;
 	int reversedone = 50;
@@ -39,7 +41,8 @@ public:
 		gear_catch(gear_port),
 		l_stick(lstick_port),
 		r_stick(rstick_port),
-		gear_cam(offset_port)
+		gear_cam(offset_port),
+		boiler_cam()
     {
 	}
 
@@ -47,6 +50,14 @@ public:
 	double GetOffSet()
 	{
 		return gear_cam.GetOffset();
+	}
+
+	double GetTurretXOffset(){
+		return boiler_cam.getXOffset();
+	}
+
+	double GetTurretYOffset(){
+		return boiler_cam.getYOffset();
 	}
 
 	/* Basic tank drive */
@@ -141,17 +152,25 @@ public:
 	 * Method : Checks if the PixyCam sees a target,
 	 * 			feeds the offset of the target into the motors,
 	 * 			and stops if the offset is within (-0.05, 0.05) */
-	void TrackHook()
+	bool TrackHook()
 	{
 		if ((int)gear_cam.GetOffset() != -2 && (gear_cam.GetOffset() > 0.05 && gear_cam.GetOffset() < -0.05))
 		{
 			l_motor.Set(gear_cam.GetOffset());
-			r_motor.Set(gear_cam.GetOffset());
+			r_motor.Set(-gear_cam.GetOffset());
+			return 1;
 		}
 		else
 		{
 			StopMotors();
+			return 0;
 		}
+	}
+
+	void TrackBoiler(){
+		l_motor.Set(GetTurretXOffset());
+		r_motor.Set(-GetTurretYOffset());
+		//Add Code for power/y axis aiming here
 	}
 
 	/* Finds an average distance between the motors in case of discrepancies */

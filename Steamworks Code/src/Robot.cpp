@@ -67,6 +67,8 @@ public:
 				bot.StopMotors();
 			}*/
 
+
+
 			if(bot.GetDistance() < 10000){
 				bot.SetRight(.31);
 				bot.SetLeft(.3);
