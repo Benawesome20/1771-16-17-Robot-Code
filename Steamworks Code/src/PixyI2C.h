@@ -21,7 +21,7 @@ struct Block { // A "Block" of data
   void print()
   {
     int i, j;
-    char buf[128], sig[6], d;
+    char sig[6], d;
    bool flag;
     if (signature>PIXY_MAX_SIGNATURE) // color code! (CC)
    {
@@ -39,7 +39,6 @@ struct Block { // A "Block" of data
     }
    else // regular block.  Note, angle is always zero, so no need to print
       printf("sig: %d x: %d y: %d width: %d height: %d\n", signature, x, y, width, height); //prints out data to console instead of smartDashboard -> check on the side of the driver station, check +print and click view console
-    //Serial.print(buf);
   }
   uint16_t signature; //Identification number for your object - you could set it in the pixymon
   uint16_t x; //0 - 320
@@ -57,9 +56,8 @@ class PixyI2C {
 	Block blocks[100];
 
 public:
-	PixyI2C():
-		i2c(I2C::Port::kOnboard,PIXY_I2C_DEFAULT_ADDR)
-	{
+	PixyI2C(){
+		i2c = new I2C(I2C::Port::kOnboard,PIXY_I2C_DEFAULT_ADDR);
 	}
 
 	bool getStart() //checks whether if it is start of the normal frame, CC frame, or the data is out of sync

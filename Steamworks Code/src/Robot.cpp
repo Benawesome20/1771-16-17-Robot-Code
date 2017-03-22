@@ -54,6 +54,7 @@ public:
 		}
 	}
 
+	int dist = 5000;
 	void AutonomousPeriodic() {
 		if (autoSelected == autoNameCustom) {
 			// Custom Auto goes here
@@ -68,12 +69,37 @@ public:
 			}*/
 
 
-
-			if(bot.GetDistance() < 10000){
+			/*if(bot.GetDistance() < 10000){ //10000 will go past the line
 				bot.SetRight(.31);
 				bot.SetLeft(.3);
 			}else{
 				bot.StopMotors();
+			}*/
+
+
+			/* ======< AUTONOMOUS >=======
+			 * 	Drive 5000 (about halfway to
+			 * 	the line). If no tape is detected
+			 * 	continue moving past the line.
+			 * 	If the tape is seen but the bot
+			 * 	needs to be realigned, realign
+			 * 	itself.Otherwise if it is seen
+			 * 	and no turning is required, drive
+			 * 	forward (Hopefully putting the
+			 * 	gear on the peg).
+			 */
+			if(bot.GetDistance() < dist){
+				bot.DriveForwardHopefully(.4);
+			}
+
+			if(bot.TrackHook() == -2){
+				dist = 10000;
+			}else if(bot.TrackHook() == -1){
+				/*if(!code->isWorking || bot.isBlownUp())
+						self.destruct();*/
+				bot.DriveForwardHopefully(.3);
+			}else{
+				bot.TrackHook();
 			}
 		}
 		PutNumbers();

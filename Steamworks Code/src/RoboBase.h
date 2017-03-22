@@ -152,25 +152,35 @@ public:
 	 * Method : Checks if the PixyCam sees a target,
 	 * 			feeds the offset of the target into the motors,
 	 * 			and stops if the offset is within (-0.05, 0.05) */
-	bool TrackHook()
+	int TrackHook()
 	{
-		if ((int)gear_cam.GetOffset() != -2 && (gear_cam.GetOffset() > 0.05 && gear_cam.GetOffset() < -0.05))
+		if ((int)gear_cam.GetOffset() != -2)
 		{
+			if((gear_cam.GetOffset() > 0.05 && gear_cam.GetOffset() < -0.05)){
+				StopMotors();
+				return -1; /*  -1 signifies offset is small but hook is found*/
+			}
+
 			l_motor.Set(gear_cam.GetOffset());
 			r_motor.Set(-gear_cam.GetOffset());
-			return 1;
+			return 1; /*	1 signifies found object and turning towards it*/
 		}
 		else
 		{
 			StopMotors();
-			return 0;
+			return -2; /*	-2 signifies object was not found*/
 		}
 	}
 
-	void TrackBoiler(){
+	int TrackBoiler(){
 		l_motor.Set(GetTurretXOffset());
 		r_motor.Set(-GetTurretYOffset());
-		//Add Code for power/y axis aiming here
+		/*
+		 * Add Code for shoot power/y axis aiming here
+		 *
+		 */
+		return 1;
+
 	}
 
 	/* Finds an average distance between the motors in case of discrepancies */
@@ -200,6 +210,14 @@ public:
 	void SetDist()
 	{
 		setDist = GetDistance();
+	}
+
+	void DriveForwardHopefully(double speed){
+		l_motor.Set(speed);
+		if(!speed)
+			r_motor.Set(speed+.01);
+		else
+			r_motor.Set(0);
 	}
 
 	/* Purpose: Drives in 'dir' direction at 'speed' speed for 'distance' distance

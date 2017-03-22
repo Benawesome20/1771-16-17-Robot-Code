@@ -30,7 +30,7 @@ public:
 		if (offset.GetVoltage())
 			return ((double)offset.GetVoltage() - (3.3/2.0)) / (3.3/2.0);
 		else
-			return 0.0;
+			return -2.0;
 	}
 
 	/* Returns the raw offset data in voltage form, (0V, 3.3V) */
