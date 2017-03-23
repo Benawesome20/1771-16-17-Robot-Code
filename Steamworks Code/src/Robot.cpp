@@ -89,17 +89,17 @@ public:
 			 * 	gear on the peg).
 			 */
 			if(bot.GetDistance() < dist){
-				bot.DriveForwardHopefully(.4);
-			}
-
-			if(bot.TrackHook() == -2){
-				dist = 10000;
-			}else if(bot.TrackHook() == -1){
-				/*if(!code->isWorking || bot.isBlownUp())
-						self.destruct();*/
 				bot.DriveForwardHopefully(.3);
 			}else{
-				bot.TrackHook();
+				if(bot.TrackHook() == -2){
+					dist = 10000;
+				}else if(bot.TrackHook() == -1){
+					/*if(!code->isWorking || bot.isBlownUp())
+							self.kill()*/
+					bot.DriveForwardHopefully(.3); //	Method of stopping once hitting peg ???
+				}else{
+					bot.TrackHook();
+				}
 			}
 		}
 		PutNumbers();
@@ -132,8 +132,7 @@ public:
 			bot.AutoShift();
 		}
 
-		if(T1)
-		{
+		if(T1){
 			//balls.turret.Fire();
 			bot.SetCatch(1);
 		}else{

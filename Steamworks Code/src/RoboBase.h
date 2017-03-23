@@ -212,10 +212,11 @@ public:
 		setDist = GetDistance();
 	}
 
+	/* Adds .01 to right side to compensate for more weighted right side */
 	void DriveForwardHopefully(double speed){
 		l_motor.Set(speed);
-		if(!speed)
-			r_motor.Set(speed+.01);
+		if(speed)		//If speed is not 0
+			r_motor.Set(speed+RIGHT_SIDE_DIFF);
 		else
 			r_motor.Set(0);
 	}

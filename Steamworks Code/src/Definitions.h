@@ -61,4 +61,6 @@
 
 #define BOILER_SIGNATURE			2
 
+#define RIGHT_SIDE_DIFF				.01
+
 #endif /* SRC_DEFINITIONS_H_ */
