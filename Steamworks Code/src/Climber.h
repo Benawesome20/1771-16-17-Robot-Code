@@ -26,11 +26,11 @@ public:
 		climb_motor.ConfigNeutralMode(CANTalon::kNeutralMode_Brake);
 	}
 
-	void ClimbUp(int distance)
+	void ClimbUp(int current)
 	{
-		if (climb_motor.GetEncPosition() < distance )
+		if (climb_motor.GetOutputCurrent() < current)
 		{
-			climb_motor.Set(.5);
+			climb_motor.Set(1);
 		}
 		else
 		{
@@ -48,6 +48,11 @@ public:
 	double GetEncPosition()
 	{
 		return climb_motor.GetEncPosition();
+	}
+
+	double GetOutputCurrent()
+	{
+		return climb_motor.GetOutputCurrent();
 	}
 
 	void ClearEncoder()

@@ -24,7 +24,7 @@
 #define L_ENCODER_CH_1 0					//Left encoder channel 1
 #define L_ENCODER_CH_2 1					//Left encoder channel 2
 #define R_ENCODER_CH_1 2					//Right encoder channel 1
-#define R_ENCODER_CH_2 3					//Right encoder channel 2
+#define R_ENCODER_CH_2 4					//Right encoder channel 2
 #define T_ENCODER_CH_1 4					//Turret encoder channel 1
 #define T_ENCODER_CH_2 5					//Turret encoder channel 2
 #define A_ENCODER_CH_1 6					//Aim encoder channel 1
@@ -61,6 +61,6 @@
 
 #define BOILER_SIGNATURE			2
 
-#define RIGHT_SIDE_DIFF				.01
+#define ANGLE_GAIN					0.9
 
 #endif /* SRC_DEFINITIONS_H_ */

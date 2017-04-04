@@ -46,6 +46,7 @@ public:
 		autoSelected = chooser.GetSelected();
 		// std::string autoSelected = SmartDashboard::GetString("Auto Selector", autoNameDefault);
 		std::cout << "Auto selected: " << autoSelected << std::endl;
+		bot.ZeroNavX();
 
 		if (autoSelected == autoNameCustom) {
 			// Custom Auto goes here
@@ -55,6 +56,9 @@ public:
 	}
 
 	int dist = 5000;
+
+	//double right = SmartDashboard::GetNumber("DB/Slider 0", 0.3);
+	//double left = SmartDashboard::GetNumber("DB/Slider 1", 0.3);
 	void AutonomousPeriodic() {
 		if (autoSelected == autoNameCustom) {
 			// Custom Auto goes here
@@ -68,39 +72,29 @@ public:
 				bot.StopMotors();
 			}*/
 
-
-			/*if(bot.GetDistance() < 10000){ //10000 will go past the line
-				bot.SetRight(.31);
-				bot.SetLeft(.3);
-			}else{
-				bot.StopMotors();
-			}*/
-
-
-			/* ======< AUTONOMOUS >=======
-			 * 	Drive 5000 (about halfway to
-			 * 	the line). If no tape is detected
-			 * 	continue moving past the line.
-			 * 	If the tape is seen but the bot
-			 * 	needs to be realigned, realign
-			 * 	itself.Otherwise if it is seen
-			 * 	and no turning is required, drive
-			 * 	forward (Hopefully putting the
-			 * 	gear on the peg).
-			 */
-			if(bot.GetDistance() < dist){
-				bot.DriveForwardHopefully(.3);
-			}else{
-				if(bot.TrackHook() == -2){
-					dist = 10000;
-				}else if(bot.TrackHook() == -1){
-					/*if(!code->isWorking || bot.isBlownUp())
-							self.kill()*/
-					bot.DriveForwardHopefully(.3); //	Method of stopping once hitting peg ???
+			bool first_cross = 0;
+			if(!first_cross){
+				if(bot.GetDisplacementX() < 4 || bot.GetDistance() < 1000){ // Travel ~3.5 meters (or original distance calculation)
+					bot.DriveStraight(.3);
 				}else{
-					bot.TrackHook();
+					bot.ResetDisplacement();
+					first_cross = 1;
+					bot.StopMotors();
+				}
+			}else{
+				bool back = 0;
+				if(!back && bot.GetDisplacementX() < 2){
+					bot.DriveStraight(-.3);
+				}else{
+					back = 1;
+				}
+
+				if(back){
+					bot.TurnAngle(45);
 				}
 			}
+
+
 		}
 		PutNumbers();
 	}
@@ -132,16 +126,19 @@ public:
 			bot.AutoShift();
 		}
 
-		if(T1){
+		if(T1 || R11)
+		{
 			//balls.turret.Fire();
-			bot.SetCatch(1);
-		}else{
 			bot.SetCatch(0);
+		}
+		else
+		{
+			bot.SetCatch(1);
 		}
 
 		if(T5)
 		{
-			//bot.ClimpUp(50);
+			balls.ClimpUp(15);
 		}
 		else //if(T6)
 		{
@@ -177,7 +174,8 @@ public:
 		SmartDashboard::PutString("DB/String 4", "Right Distance: " + std::to_string((int)bot.GetRightDistance()));
 		SmartDashboard::PutString("DB/String 5", "Avg Distance: " + std::to_string((int)bot.GetDistance()));
 		SmartDashboard::PutString("DB/String 6", "Turret Rotation: " + std::to_string(balls.turret.GetAvgRotation()));
-		SmartDashboard::PutString("DB/String 7", "Climb Encoder: " + std::to_string(balls.GetClimbEncoder()));
+		SmartDashboard::PutString("DB/String 7", "Climb Current: " + std::to_string(balls.GetClimbCurrent()));
+		//SmartDashboard::PutString("DB/String 8", "Right: " + std::to_string(right));
 	}
 
 private:

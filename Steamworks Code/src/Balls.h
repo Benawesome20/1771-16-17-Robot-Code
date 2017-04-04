@@ -79,6 +79,11 @@ public:
 		return c_motor.GetEncPosition();
 	}
 
+	double GetClimbCurrent()
+	{
+		return c_motor.GetOutputCurrent();
+	}
+
 	void ClearClimbEncoder()
 	{
 		c_motor.ClearEncoder();

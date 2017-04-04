@@ -15,6 +15,7 @@
 #include "Transmission.h"
 #include "Pixy.h"
 #include "PixyI2C.h"
+#include "NavX.h"
 
 class RoboBase {
 	Transmission l_motor;
@@ -25,6 +26,7 @@ class RoboBase {
 	frc::Joystick r_stick;
 	Pixy gear_cam;
 	PixyI2C boiler_cam;
+	NavX navx;
 
 	bool reverse;
 	int reversedone = 50;
@@ -103,6 +105,45 @@ public:
 		r_motor.Reset();
 	}
 
+	void ShimmyLeft(){
+
+
+	}
+
+	/* Takes a value from  0 to 360, as well as a directin to turn */
+	void TurnAngle(double angle, int dir){
+		while(navx.GetAngle()%360-angle > 4){ // While there is a greater than 4 degree threshold to the desired angle
+			SetLeft(dir);
+			SetRight(-dir);
+		}
+	}
+
+	/* Takes a value from 0 to 360 */
+	void TurnAbsolute(double angle){
+		if(angle < 0) return;
+		double a = angle % 360;			// Compensate for angles greater than 360
+		TurnAngle(a , (angle-navx.GetAngle())/abs(angle-navx.GetAngle()));	// Turn angle is a, direction is equal to the sign of the difference between the desired angle and current angle
+	}
+
+	/* Takes a value from -180 to 180 */
+	void TurnRelative(double angle){
+		double currentAngle = navx.GetAngle();
+
+
+	}
+
+	float GetDisplacementX(){
+		return navx.GetDisplacementX();
+	}
+
+	float GetDisplacementZ(){
+		return navx.GetDisplacementZ();
+	}
+
+	double GetAngle(){
+		return navx.GetAngle();
+	}
+
 	/* Stops all motor movement */
 	void StopMotors() {
 		l_motor.Set(0);
@@ -135,6 +176,7 @@ public:
 		return r_stick.GetY();
 	}
 
+
 	/* Gets the button 'butt' of the left joystick */
 	bool GetLeftButton(int butt)
 	{
@@ -146,6 +188,17 @@ public:
 	{
 		return r_stick.GetRawButton(butt);
 	}
+
+	void ZeroNavX(){
+		navx.ZeroYaw();
+		ResetDisplacement();
+	}
+
+	void ResetDisplacement(){
+		navx.ResetDisplacement();
+	}
+
+
 
 	/* Purpose: Turns the robot to face a target
 	 *
@@ -212,13 +265,21 @@ public:
 		setDist = GetDistance();
 	}
 
-	/* Adds .01 to right side to compensate for more weighted right side */
-	void DriveForwardHopefully(double speed){
-		l_motor.Set(speed);
-		if(speed)		//If speed is not 0
-			r_motor.Set(speed+RIGHT_SIDE_DIFF);
-		else
-			r_motor.Set(0);
+
+	/* Purpose: Drives 'dist' distance (either meters or encoder distance) at 'speed' speed
+	 * 			while compensating for drift by factoring in rotation
+	 *
+	 * Method: Finds Yaw and adds it divided by 180 (the max it can be) multiplied by
+	 * 			the gain value, to (hopefully) allow it to drive straight
+	 */
+	void DriveStraight(double speed){
+		if(speed > 1) speed = 1.0;
+		if(speed < -1) speed = -1.0;
+
+		double change = navx.GetYaw()/180*ANGLE_GAIN;
+
+		SetLeft(speed-change);		// CHANGE ADDITION/SUBTRACTION IF NAVX GOES NEGATIVE WHEN TURNING RIGHT
+		SetRight(speed+change);
 	}
 
 	/* Purpose: Drives in 'dir' direction at 'speed' speed for 'distance' distance
