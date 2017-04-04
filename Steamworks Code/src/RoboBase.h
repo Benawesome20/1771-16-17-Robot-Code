@@ -105,31 +105,97 @@ public:
 		r_motor.Reset();
 	}
 
+	/* Purpose: Shimmy to the left once
+	 *
+	 * Method:  Move back and to the left to a total of .5 meters (about 1.5 feet),
+	 * 			then turn to the angle before movement and go straight forward
+	 */
 	void ShimmyLeft(){
-
-
-	}
-
-	/* Takes a value from  0 to 360, as well as a directin to turn */
-	void TurnAngle(double angle, int dir){
-		while(navx.GetAngle()%360-angle > 4){ // While there is a greater than 4 degree threshold to the desired angle
-			SetLeft(dir);
-			SetRight(-dir);
+		int pass = 0;
+		double displacement = -2;
+		double currentAngle = fmod(navx.GetAngle(),360.0);
+		navx.ResetDisplacement();
+		while(navx.GetDisplacementTotal() < 0.5 && pass < 10){
+			SetLeft(0.20);
+			SetRight(0.35);
+			if(navx.GetDisplacementTotal() - displacement < .2)
+				pass++;
+			displacement = navx.GetDisplacementTotal();
+		}
+		if(pass >= 10) return;	// If previous loop went through 10 times with no change stop attempting to Shimmy
+		navx.ResetDisplacement();
+		TurnAbsolute(currentAngle);
+		pass = 0;
+		displacement = -2;
+		while(navx.GetDisplacementTotal() < 0.6 && pass < 10){
+			DriveStraight(.4);
+			if(navx.GetDisplacementTotal() - displacement < .2)
+				pass++;
+			displacement = navx.GetDisplacementTotal();
 		}
 	}
 
-	/* Takes a value from 0 to 360 */
-	void TurnAbsolute(double angle){
-		if(angle < 0) return;
-		double a = angle % 360;			// Compensate for angles greater than 360
-		TurnAngle(a , (angle-navx.GetAngle())/abs(angle-navx.GetAngle()));	// Turn angle is a, direction is equal to the sign of the difference between the desired angle and current angle
+	void ShimmyRight(){
+			int pass = 0;
+			double displacement = -2;
+			double currentAngle = fmod(navx.GetAngle(),360.0);
+			navx.ResetDisplacement();
+			while(navx.GetDisplacementTotal() < 0.5 && pass < 10){
+				SetLeft(0.35);
+				SetRight(0.20);
+				if(navx.GetDisplacementTotal() - displacement < .2)
+					pass++;
+				displacement = navx.GetDisplacementTotal();
+			}
+			if(pass >= 10) return;	// If previous loop went through 10 times with no change stop attempting to Shimmy
+			navx.ResetDisplacement();
+			TurnAbsolute(currentAngle);
+			pass = 0;
+			displacement = -2;
+			while(navx.GetDisplacementTotal() < 0.6 && pass < 10){
+				DriveStraight(.4);
+				if(navx.GetDisplacementTotal() - displacement < .2)
+					pass++;
+				displacement = navx.GetDisplacementTotal();
+			}
+		}
+
+	/* Takes an angle value from 0 to 360 and a direction to turn and turns
+	 * that direction until the angles match up
+	 *
+	 * Uses absolute angles
+	 */
+	void TurnAngle(double angle, int dir){
+		int pass = 0;
+		double prevAngle;
+		while(fmod(navx.GetAngle(),360.0-angle) > 7 && pass < 10){ // While there is a greater than 4 degree threshold to the desired angle
+			SetLeft(dir);
+			SetRight(-dir);
+			if(fmod(navx.GetAngle(),360.0) - prevAngle < 7) // Checks if little to no change is occuring in angle
+				pass++;							 	// to stop possible infinite loop
+			prevAngle = fmod(navx.GetAngle(),360.0);
+		}
+		StopMotors();
 	}
 
-	/* Takes a value from -180 to 180 */
+	/* Turns to an absolute angle and invokes TurnAngle() with direction being the shortest
+	 * direction to get to the desired angle
+	 * angle takes a value from 0 to 360
+	 */
+	void TurnAbsolute(double angle){
+		if(angle < 0) return;
+		double a = fmod(angle,360.0);			// Compensate for angles greater than 360 or negative angles
+		double navang = fmod(navx.GetAngle(),360.0);
+		TurnAngle(a , (angle-navang)/abs(angle-navang));	// Turn angle is a, direction is equal to the sign of the difference between the desired angle and current angle
+	}
+
+	/* Takes a value from -180 to 180
+	 * Invokes TurnAngle() with angle being calculated from the absolute angle and direction
+	 * being the sign of the angle change
+	 */
 	void TurnRelative(double angle){
-		double currentAngle = navx.GetAngle();
-
-
+		double a = fmod((fmod(navx.GetAngle(),360.0) + angle),360.0); // turnAngle = the current angle, plus the change, modulo 360 to be 0-360
+		TurnAngle(a, angle/abs(angle));
 	}
 
 	float GetDisplacementX(){

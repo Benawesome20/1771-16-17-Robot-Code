@@ -90,7 +90,7 @@ public:
 				}
 
 				if(back){
-					bot.TurnAngle(45);
+					bot.TurnAbsolute(45);
 				}
 			}
 
@@ -156,6 +156,8 @@ public:
 			balls.SetIntake(0);
 			balls.TurretStickDrive();
 		}
+
+		/***---=====<<<({|[ ADD SHIMMY STUFF ]|})>>>=====---***/
 
 		PutNumbers();
 
