@@ -22,11 +22,11 @@ public:
 	Climber c_motor;
 	frc::Joystick t_stick;
 
-	Balls(int tmotor_port, int amotor_port, int smotor_port, int imotor_port, int c_motor_port, int tencoder_1,
+	Balls(int tmotor_port, int amotor_port, int smotor_port, int imotor_port, int c_motor_port, int c_motor_port2, int tencoder_1,
 		  int tencoder_2, int aencoder_1, int aencoder_2, int tstick_port):
 		turret(tmotor_port, amotor_port, smotor_port, tencoder_1, tencoder_2, aencoder_1, aencoder_2),
 		intake(imotor_port),
-		c_motor(c_motor_port),
+		c_motor(c_motor_port, c_motor_port2),
 		t_stick(tstick_port)
 	{
 	}
@@ -71,23 +71,23 @@ public:
 
 	void ManualClimb()
 	{
-		c_motor.ManualClimb(t_stick.GetY()); // figure out actual stick to use
+		c_motor.ManualClimb(-fabs(t_stick.GetY())); // figure out actual stick to use
 	}
 
-	double GetClimbEncoder()
+	/*double GetClimbEncoder()
 	{
 		return c_motor.GetEncPosition();
-	}
+	}*/
 
-	double GetClimbCurrent()
+	double GetAvgClimbCurrent()
 	{
-		return c_motor.GetOutputCurrent();
+		return c_motor.GetAvgOutputCurrent();
 	}
 
-	void ClearClimbEncoder()
+	/*void ClearClimbEncoder()
 	{
 		c_motor.ClearEncoder();
-	}
+	}*/
 
 	void StopTurretFire()
 	{

@@ -15,12 +15,12 @@
 #include "Transmission.h"
 
 class Climber {
-	CANTalon climb_motor;
+	Transmission climb_motor;
 	double startingDist;
 
 public:
-	Climber(int climb_port):
-		climb_motor(climb_port)
+	Climber(int climb_port1, int climb_port2):
+		climb_motor(climb_port1, climb_port2 , 0, 0)
 	{
 		startingDist = 0;
 		climb_motor.ConfigNeutralMode(CANTalon::kNeutralMode_Brake);
@@ -28,7 +28,7 @@ public:
 
 	void ClimbUp(int current)
 	{
-		if (climb_motor.GetOutputCurrent() < current)
+		if (climb_motor.GetAvgOutputCurrent() < current)
 		{
 			climb_motor.Set(1);
 		}
@@ -37,7 +37,7 @@ public:
 			climb_motor.Set(0);
 		}
 
-		//^^ I added the else statement, but I'm not sure if it's necessary
+		//^^ I added the else statement, but I'm not sure if it's necessary // it is
 	}
 
 	void ManualClimb(double rate)
@@ -45,20 +45,30 @@ public:
 		climb_motor.Set(rate);
 	}
 
-	double GetEncPosition()
+	/*double GetEncPosition()
 	{
 		return climb_motor.GetEncPosition();
-	}
+	}*/
 
-	double GetOutputCurrent()
+	double GetAvgOutputCurrent()
 	{
-		return climb_motor.GetOutputCurrent();
+		return climb_motor.GetAvgOutputCurrent();
 	}
 
-	void ClearEncoder()
+	double Get1OutputCurrent()
+	{
+		return climb_motor.Get1OutputCurrent();
+	}
+
+	double Get2OutputCurrent()
+	{
+		return climb_motor.Get2OutputCurrent();
+	}
+
+	/*void ClearEncoder()
 	{
 		climb_motor.SetEncPosition(0);
-	}
+	}*/
 };
 
 

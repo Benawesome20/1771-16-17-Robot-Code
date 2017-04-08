@@ -52,6 +52,21 @@ public:
 		motor.ConfigNeutralMode(mode);
 	}
 
+	double Get1OutputCurrent()
+	{
+		return motor.GetOutputCurrent();
+	}
+
+	double Get2OutputCurrent()
+	{
+		return motor2.GetOutputCurrent();
+	}
+
+	double GetAvgOutputCurrent()
+	{
+		return (motor.GetOutputCurrent() + motor2.GetOutputCurrent()) / 2;
+	}
+
 	/* Resets the encoder value */
 	void Reset()
 	{

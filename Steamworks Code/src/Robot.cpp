@@ -8,8 +8,8 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <WPILib.h>
 #include <CANTalon.h>
-#include <Climber.h>
 
+#include "Climber.h"
 #include "Balls.h"
 #include "Buttons.h"
 #include "Definitions.h"
@@ -49,10 +49,12 @@ public:
 		bot.ZeroNavX();
 
 		if (autoSelected == autoNameCustom) {
-			// Custom Auto goes here
+			bot.ZeroNavX();
 		} else {
 			// Default Auto goes here
 		}
+
+		StartDataLog("auto.log");
 	}
 
 	int dist = 5000;
@@ -61,46 +63,69 @@ public:
 	//double left = SmartDashboard::GetNumber("DB/Slider 1", 0.3);
 	void AutonomousPeriodic() {
 		if (autoSelected == autoNameCustom) {
-			// Custom Auto goes here
-		} else {
-
 			/*if(bot.GetDistance() < 3000){
-				bot.DriveXDistance(.3);
-				SmartDashboard::PutString("DB/String 8", "If Is True");
+							bot.DriveXDistance(.3);
+							SmartDashboard::PutString("DB/String 8", "If Is True");
+						}else{
+							SmartDashboard::PutString("DB/String 3", "If is False");
+							bot.StopMotors();
+						}*/
+
+						if(bot.GetDistance() < 10000){ // Should travel 1.5 meters
+							bot.DriveStraight(.3);
+						}
+						/*bool first_cross = 0;
+						if(!first_cross){
+							if(bot.GetDisplacementX() < 4 && bot.GetDistance() < 1000){ // Travel ~3.5 meters (or original distance calculation)
+								bot.DriveStraight(.3);
+							}else{
+								bot.ResetDisplacement();
+								first_cross = 1;
+								bot.StopMotors();
+							}
+						}else{
+							bool back = 0;
+							if(!back && bot.GetDisplacementX() < 2){
+								bot.DriveStraight(-.3);
+							}else{
+								back = 1;
+								bot.ResetDisplacement();
+							}
+
+							if(back){
+								bot.TurnAbsolute(45.0);
+								if(bot.GetDisplacementTotal() < 1.5 && bot.GetDistance() < 1000)
+									bot.DriveStraight(.3);
+								else
+									bot.StopMotors();
+							}
+						}
+						*/
+		}
+		else {
+
+			if(Timer::GetMatchTime() < 7.0){
+				bot.DriveStraight(.3);
 			}else{
-				SmartDashboard::PutString("DB/String 3", "If is False");
 				bot.StopMotors();
-			}*/
-
-			bool first_cross = 0;
-			if(!first_cross){
-				if(bot.GetDisplacementX() < 4 || bot.GetDistance() < 1000){ // Travel ~3.5 meters (or original distance calculation)
-					bot.DriveStraight(.3);
-				}else{
-					bot.ResetDisplacement();
-					first_cross = 1;
-					bot.StopMotors();
-				}
-			}else{
-				bool back = 0;
-				if(!back && bot.GetDisplacementX() < 2){
-					bot.DriveStraight(-.3);
-				}else{
-					back = 1;
-				}
-
-				if(back){
-					bot.TurnAbsolute(45);
-				}
 			}
 
-
 		}
+
+
+		bot.AddAccelerometerDistance();
+		LogData("auto.log");
 		PutNumbers();
 	}
 
-	void TeleopInit() {
+	void TestInit(){
+		StartDataLog("test.log");
+	}
 
+
+	void TeleopInit() {
+		StartDataLog("tele.log");
+		bot.ZeroNavX();
 	}
 
 	void TeleopPeriodic() {
@@ -138,7 +163,7 @@ public:
 
 		if(T5)
 		{
-			balls.ClimpUp(15);
+
 		}
 		else //if(T6)
 		{
@@ -157,34 +182,78 @@ public:
 			balls.TurretStickDrive();
 		}
 
-		/***---=====<<<({|[ ADD SHIMMY STUFF ]|})>>>=====---***/
+		/***---=====<<<({|[ SHIMMY STUFF ]|})>>>=====---***/
+		/*int back = 0, turn = 0;
+		double angle = 1771;
+		if(angle == 1771)
+		 angle = bot.GetAbsoluteAngle();
+		if(T5){
+			bot.ShimmyLeft(&back, &turn, &angle);
+		}else if(T6){
+			//bot.ShimmyRight(&back, &turn, &angle);
+		}*/
 
+
+		bot.AddAccelerometerDistance();
+		LogData("tele.log");
 		PutNumbers();
 
-	}
-
-	void TestPeriodic() {
-		lw->Run();
 	}
 
 	void PutNumbers()
 	{
 		SmartDashboard::PutString("DB/String 0", "Camera Offset: " + std::to_string(bot.GetOffSet()));
-		SmartDashboard::PutString("DB/String 1", "Shifter: " + std::to_string(bot.GetShift()));\
+		SmartDashboard::PutString("DB/String 1", "Shifter: " + std::to_string(bot.GetShift()));
 		SmartDashboard::PutString("DB/String 2", "Gear Catch: " + std::to_string(bot.GetCatch()));
 		SmartDashboard::PutString("DB/String 3", "Left Distance: " + std::to_string((int)bot.GetLeftDistance()));
 		SmartDashboard::PutString("DB/String 4", "Right Distance: " + std::to_string((int)bot.GetRightDistance()));
 		SmartDashboard::PutString("DB/String 5", "Avg Distance: " + std::to_string((int)bot.GetDistance()));
-		SmartDashboard::PutString("DB/String 6", "Turret Rotation: " + std::to_string(balls.turret.GetAvgRotation()));
-		SmartDashboard::PutString("DB/String 7", "Climb Current: " + std::to_string(balls.GetClimbCurrent()));
+		//SmartDashboard::PutString("DB/String 6", "Turret Rotation: " + std::to_string(balls.turret.GetAvgRotation()));
+		SmartDashboard::PutString("DB/String 7", "Climb Current: " + std::to_string(balls.GetAvgClimbCurrent()));
+		SmartDashboard::PutString("DB/String 8", "NavX Abs Angle: " + std::to_string(bot.GetAbsoluteAngle()).substr(0,6));
+		SmartDashboard::PutString("DB/String 9", "NavX Raw Yaw: " + std::to_string(	bot.GetYaw()).substr(0,6));
+		SmartDashboard::PutString("DB/String 6", "Acc. Dist: " + std::to_string(	bot.GetAccelerometerDistance()).substr(0,6)	);
 		//SmartDashboard::PutString("DB/String 8", "Right: " + std::to_string(right));
 	}
 
-private:
+
+	void TestPeriodic() {
+		lw->Run();
+		LogData("test.log");
+	}
+
+	void DisabledInit(){
+		StopDataLog();
+	}
+
+	void LogData(std::string file){
+		std::string cmd = "echo \"T:" + std::to_string(Timer::GetMatchTime()) +
+								" D:" + std::to_string(bot.GetAccelerometerDistance()) + // Distance
+								" A:" + std::to_string(bot.GetAbsoluteAngle()) + 		 // Angle
+								" RE:" + std::to_string((int)bot.GetRightDistance()) + 	 // Right Encoder Val
+								" LE:" + std::to_string((int)bot.GetLeftDistance()) +	 // Left Encoder Val
+								" AD:" + std::to_string((int)bot.GetDistance()) +		 // Avg Encoder Val
+								" RY:" + std::to_string(bot.GetYaw()).substr(0,6) +		 // Yaw Value
+								" CD:" + std::to_string(balls.GetAvgClimbCurrent()) +	 // Climb Current
+								"\\n\" >> /media/usb/" + file;
+		system(cmd.c_str());
+	}
+
+	void StartDataLog(std::string file){
+		system("./mount.sh");
+		system(("touch " + file).c_str());
+	}
+
+	void StopDataLog(){
+		system("./unmount.sh");
+	}
+
+
+	private:
 	frc::LiveWindow* lw = LiveWindow::GetInstance();
 	frc::SendableChooser<std::string> chooser;
 	const std::string autoNameDefault = "Default";
-	const std::string autoNameCustom = "My Auto";
+	const std::string autoNameCustom = "JustinAuto";
 	std::string autoSelected;
 //	frc::Joystick l_stick {0};
 //	frc::Joystick r_stick {1};
@@ -210,7 +279,8 @@ private:
 		            A_MOTOR_PORT,
 					S_MOTOR_PORT,
 					I_MOTOR_PORT,
-					C_MOTOR_PORT,
+					C_MOTOR_PORT_1,
+					C_MOTOR_PORT_2,
 					T_ENCODER_CH_1,
 					T_ENCODER_CH_2,
 					A_ENCODER_CH_1,

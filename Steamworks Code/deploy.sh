@@ -1,0 +1,3 @@
+./moveprogram.sh
+make deploy
+

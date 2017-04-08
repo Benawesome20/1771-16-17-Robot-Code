@@ -15,10 +15,11 @@
 #define L_MOTOR_PORT_2 2					//Left motor port 2
 #define R_MOTOR_PORT_1 3					//Right motor port 1
 #define R_MOTOR_PORT_2 4					//Right motor port 2
-#define C_MOTOR_PORT   5					//Climbing motor port
-#define T_MOTOR_PORT   6					//Turret motor port, controls rotation
-#define A_MOTOR_PORT   7					//Aim motor port, controls aiming hood, which controls the height of the shot
-#define S_MOTOR_PORT   8					//Shoot motor port, controls the flywheels
+#define C_MOTOR_PORT_1 5					//Climbing motor port 1
+#define C_MOTOR_PORT_2 6					//Climbing motor port 2
+#define T_MOTOR_PORT   7 //change					//Turret motor port, controls rotation
+#define A_MOTOR_PORT   8					//Aim motor port, controls aiming hood, which controls the height of the shot
+#define S_MOTOR_PORT   10					//Shoot motor port, controls the flywheels temp 10
 #define I_MOTOR_PORT   9					//Intake motor port
 
 #define L_ENCODER_CH_1 0					//Left encoder channel 1
@@ -61,6 +62,6 @@
 
 #define BOILER_SIGNATURE			2
 
-#define ANGLE_GAIN					0.9
+#define ANGLE_GAIN					0.7
 
 #endif /* SRC_DEFINITIONS_H_ */
