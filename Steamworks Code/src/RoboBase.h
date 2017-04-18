@@ -29,6 +29,7 @@ class RoboBase {
 	Pixy gear_cam;
 	PixyI2C boiler_cam;
 	NavX navx;
+	Timer t;
 
 	bool reverse;
 	int reversedone = 50;
@@ -50,8 +51,25 @@ public:
 		r_stick(rstick_port),
 		gear_cam(offset_port),
 		boiler_cam(),
-		acc()
+		acc(),
+		t()
     {
+	}
+
+	void StartTimer(){
+		t.Start();
+	}
+
+	void StopTimer(){
+		t.Stop();
+	}
+
+	void ResetTimer(){
+		t.Reset();
+	}
+
+	double GetSeconds(){
+		return (double)(t.Get()*1000.0);
 	}
 
 	/* Returns offset of camera target from center */
@@ -105,28 +123,88 @@ public:
 		return gear_catch.Get();
 	}
 
+	double accX = 0,
+		   velX = 0,
+		   posX = 0;
 	void AddXAccelerometerDistance(){
-		double secs = float(clock()-lastTime);
-		distanceTravelled += ((secs*acc.GetZ())*secs)*9.81;
-		lastTime = clock();
+		double secs = GetTime() - lastTime;
+		SmartDashboard::PutString("DB/String 6", "UNIX TIME: " + std::to_string(clock()));
+
+		accX = acc.GetX() * 9.81;
+		velX += accX * secs;
+		posX += velX * secs;
+
+
+		lastTime = GetTime();
 	}
 
+	double accZ = 0,
+		   velZ = 0,
+	       posZ = 0;
 	void AddZAccelerometerDistance(){
-			double secs = float(clock()-lastTime);
-			distanceTravelled += ((secs*acc.GetZ())*secs)*9.81;
-			lastTime = clock();
+			double secs = GetTime() - lastTime;
+
+			accZ = acc.GetZ() * 9.81;
+			velZ += accZ * secs;
+			posZ += velZ * secs;
+
+			lastTime = GetTime();
+	}
+
+	double accY = 0,
+		   velY = 0,
+	       posY = 0;
+	void AddYAccelerometerDistance(){
+			double secs = GetTime() - lastTime;
+
+			accY = acc.GetY() * 9.81;
+			velY += accY * secs;
+			posY += velY * secs;
+
+			lastTime = GetTime();
+	}
+
+	double GetAccelerometerX(){
+		return acc.GetX();
+	}
+
+	double GetAccelerometerZ(){
+		return acc.GetZ();
+	}
+
+	double GetAccelerometerY(){
+		return acc.GetY();
 	}
 
 	void AddAccelerometerDistance(){
 		AddXAccelerometerDistance();
 		AddZAccelerometerDistance();
-
+		AddYAccelerometerDistance();
 	}
 
-	double GetAccelerometerDistance(){
-		return distanceTravelled;
+	double GetAccelerometerVelX(){
+		return velX;
 	}
 
+	double GetAccelerometerVelZ(){
+		return velZ;
+	}
+
+	double GetAccelerometerVelY(){
+		return velY;
+	}
+
+	double GetAccelerometerPosX(){
+		return posX;
+	}
+
+	double GetAccelerometerPosZ(){
+			return posZ;
+	}
+
+	double GetAccelerometerPosY(){
+		return posY;
+	}
 
 
 	/* Resets all encoder values */

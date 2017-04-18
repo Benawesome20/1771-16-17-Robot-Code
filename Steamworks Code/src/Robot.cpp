@@ -8,6 +8,7 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <WPILib.h>
 #include <CANTalon.h>
+#include <fstream>
 
 #include "Climber.h"
 #include "Balls.h"
@@ -18,6 +19,7 @@
 #include "RoboBase.h"
 #include "Transmission.h"
 #include "Turret.h"
+#include "Cartesian.h"
 
 class Robot: public frc::IterativeRobot {
 public:
@@ -41,6 +43,8 @@ public:
 	 * if-else structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
+
+
 	void AutonomousInit() override {
 		bot.Reset();
 		autoSelected = chooser.GetSelected();
@@ -53,7 +57,7 @@ public:
 		} else {
 			// Default Auto goes here
 		}
-
+		bot.StartTimer();
 		StartDataLog("auto.log");
 	}
 
@@ -104,7 +108,7 @@ public:
 		}
 		else {
 
-			if(Timer::GetMatchTime() < 7.0){
+			if(Timer::GetMatchTime() > 7.0){
 				bot.DriveStraight(.3);
 			}else{
 				bot.StopMotors();
@@ -126,6 +130,8 @@ public:
 	void TeleopInit() {
 		StartDataLog("tele.log");
 		bot.ZeroNavX();
+		bot.ResetTimer();
+		bot.StartTimer();
 	}
 
 	void TeleopPeriodic() {
@@ -200,6 +206,8 @@ public:
 
 	}
 
+
+
 	void PutNumbers()
 	{
 		SmartDashboard::PutString("DB/String 0", "Camera Offset: " + std::to_string(bot.GetOffSet()));
@@ -212,7 +220,6 @@ public:
 		SmartDashboard::PutString("DB/String 7", "Climb Current: " + std::to_string(balls.GetAvgClimbCurrent()));
 		SmartDashboard::PutString("DB/String 8", "NavX Abs Angle: " + std::to_string(bot.GetAbsoluteAngle()).substr(0,6));
 		SmartDashboard::PutString("DB/String 9", "NavX Raw Yaw: " + std::to_string(	bot.GetYaw()).substr(0,6));
-		SmartDashboard::PutString("DB/String 6", "Acc. Dist: " + std::to_string(	bot.GetAccelerometerDistance()).substr(0,6)	);
 		//SmartDashboard::PutString("DB/String 8", "Right: " + std::to_string(right));
 	}
 
@@ -226,26 +233,154 @@ public:
 		StopDataLog();
 	}
 
+	// Shortens Strings
+	std::string small_str(std::string long_str){
+		std::string output = "";
+		char c = 0xFF;
+		for(unsigned int i = 0; i < long_str.length(); i++){
+			if(c & 0xF0 == 0xF0){ //Low Nibble
+				c &= 0x00;
+				if(long_str.at(i) == '0')
+					c = (c & 0xF0) | (_0 & 0xF);
+				else if(long_str.at(i) == '1')
+					c = (c & 0xF0) | (_1 & 0xF);
+				else if(long_str.at(i) == '2')
+					c = (c & 0xF0) | (_2 & 0xF);
+				else if(long_str.at(i) == '3')
+					c = (c & 0xF0) | (_3 & 0xF);
+				else if(long_str.at(i) == '4')
+					c = (c & 0xF0) | (_4 & 0xF);
+				else if(long_str.at(i) == '5')
+					c = (c & 0xF0) | (_5 & 0xF);
+				else if(long_str.at(i) == '6')
+					c = (c & 0xF0) | (_6 & 0xF);
+				else if(long_str.at(i) == '7')
+					c = (c & 0xF0) | (_7 & 0xF);
+				else if(long_str.at(i) == '8')
+					c = (c & 0xF0) | (_8 & 0xF);
+				else if(long_str.at(i) == '9')
+					c = (c & 0xF0) | (_9 & 0xF);
+				else if(long_str.at(i) == '.')
+					c = (c & 0xF0) | (_dot & 0xF);
+				else if(long_str.at(i) == '-')
+					c = (c & 0xF0) | (_neg & 0xF);
+				else if(long_str.at(i) == ',')
+					c = (c & 0xF0) | (_end & 0xF);
+			}else{ //High Nibble
+				if(long_str.at(i) == '0')
+					c = (c & ~0xF0) | ((_0 & 0xF) << 4);
+				else if(long_str.at(i) == '1')
+					c = (c & ~0xF0) | ((_1 & 0xF) << 4);
+				else if(long_str.at(i) == '2')
+					c = (c & ~0xF0) | ((_2 & 0xF) << 4);
+				else if(long_str.at(i) == '3')
+					c = (c & ~0xF0) | ((_3 & 0xF) << 4);
+				else if(long_str.at(i) == '4')
+					c = (c & ~0xF0) | ((_4 & 0xF) << 4);
+				else if(long_str.at(i) == '5')
+					c = (c & ~0xF0) | ((_5 & 0xF) << 4);
+				else if(long_str.at(i) == '6')
+					c = (c & ~0xF0) | ((_6 & 0xF) << 4);
+				else if(long_str.at(i) == '7')
+					c = (c & ~0xF0) | ((_7 & 0xF) << 4);
+				else if(long_str.at(i) == '8')
+					c = (c & ~0xF0) | ((_8 & 0xF) << 4);
+				else if(long_str.at(i) == '9')
+					c = (c & ~0xF0) | ((_9 & 0xF) << 4);
+				else if(long_str.at(i) == '.')
+					c = (c & ~0xF0) | ((_dot & 0xF) << 4);
+				else if(long_str.at(i) == '-')
+					c = (c & ~0xF0) | ((_neg & 0xF) << 4);
+				else if(long_str.at(i) == ',')
+					c = (c & ~0xF0) | ((_end & 0xF) << 4);
+			}
+			if((i % 2 == 0 && i) || i == long_str.length()-1){ // Every even count will fill a char (not including 0)
+				output += c;
+				c = 0xFF;
+			}
+
+		}
+
+		return output;
+	}
+
+	/*std::string decode(std::string str){
+		std::string decoded = "";
+		for(int i = 0; i < str.length(); i++){
+			switch(char mask = str & 0xF0){
+							case 0x00:
+								decoded += "0";
+								break;
+							default:
+								break;
+			}
+		}
+	}*/
+
+	struct data_packet {
+		double angle;
+		int renc;
+		int lenc;
+		double yaw;
+		double accx;
+		double accy;
+		double accz;
+		double accposx;
+		double accposy;
+		double accposz;
+	};
+
+	//FILE *tele;
 	void LogData(std::string file){
-		std::string cmd = "echo \"T:" + std::to_string(Timer::GetMatchTime()) +
-								" D:" + std::to_string(bot.GetAccelerometerDistance()) + // Distance
-								" A:" + std::to_string(bot.GetAbsoluteAngle()) + 		 // Angle
-								" RE:" + std::to_string((int)bot.GetRightDistance()) + 	 // Right Encoder Val
-								" LE:" + std::to_string((int)bot.GetLeftDistance()) +	 // Left Encoder Val
-								" AD:" + std::to_string((int)bot.GetDistance()) +		 // Avg Encoder Val
-								" RY:" + std::to_string(bot.GetYaw()).substr(0,6) +		 // Yaw Value
-								" CD:" + std::to_string(balls.GetAvgClimbCurrent()) +	 // Climb Current
-								"\\n\" >> /media/usb/" + file;
+		//std::string accelerometerDistance = std::to_string(bot.GetAccelerometerDistance());
+		std::string climber = std::to_string(balls.GetAvgClimbCurrent());
+		std::string angle = std::to_string(bot.GetAbsoluteAngle());
+
+		std::string data = std::to_string(Timer::GetMatchTime()) +
+				//" D:" + accelerometerDistance.substr(0, accelerometerDistance.length()-3) + // Distance
+				"," + angle.substr(0,6) + 		 					 // Angle
+				"," + std::to_string((int)bot.GetRightDistance()) +  // Right Encoder Val
+				"," + std::to_string((int)bot.GetLeftDistance()) +	 // Left Encoder Val
+				"," + std::to_string((int)bot.GetDistance()) +		 // Avg Encoder Val
+				"," + std::to_string(bot.GetYaw()).substr(0,6) +	 // Yaw Value
+				"," + climber.substr(0, climber.length()-3) +	     // Climb Current
+				"," + std::to_string(bot.GetAccelerometerX()) +		 // Accelerometer X
+				"," + std::to_string(bot.GetAccelerometerY()) +		 // Accelerometer Y
+				"," + std::to_string(bot.GetAccelerometerZ()) +		 // Accelerometer Z
+				"," + std::to_string(bot.GetAccelerometerPosX()) +	 // Accelerometer Pos X
+				"," + std::to_string(bot.GetAccelerometerPosY()) + 	 // Accelerometer Pos Y
+				"," + std::to_string(bot.GetAccelerometerPosZ());	 // Accelerometer Pos Z
+
+		std::string cmd = "echo \"" + data +
+								"\" >> /home/lvuser/" + file;
+
+		/*std::string cmd = "T:" + std::to_string(Timer::GetMatchTime()) +
+										" D:" + std::to_string(bot.GetAccelerometerDistance()) + // Distance
+										" A:" + std::to_string(bot.GetAbsoluteAngle()) + 		 // Angle
+										" RE:" + std::to_string((int)bot.GetRightDistance()) + 	 // Right Encoder Val
+										" LE:" + std::to_string((int)bot.GetLeftDistance()) +	 // Left Encoder Val
+										" AD:" + std::to_string((int)bot.GetDistance()) +		 // Avg Encoder Val
+										" RY:" + std::to_string(bot.GetYaw()).substr(0,6) +		 // Yaw Value
+										" CD:" + std::to_string(balls.GetAvgClimbCurrent());	 // Climb Current*/
+
+		//fprintf(tele, "%s", cmd.c_str());
 		system(cmd.c_str());
 	}
 
 	void StartDataLog(std::string file){
-		system("./mount.sh");
+		//system("./mount.sh");
+		system("cd /home/lvuser/");
 		system(("touch " + file).c_str());
+		//tele = fopen("/home/lvuser/media/tele.log", "a");
+
 	}
 
 	void StopDataLog(){
-		system("./unmount.sh");
+		//system("./unmount.sh");
+	}
+
+	void DisabledPeriodic(){
+		PutNumbers();
 	}
 
 

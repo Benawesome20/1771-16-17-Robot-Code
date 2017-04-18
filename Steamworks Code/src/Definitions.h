@@ -64,4 +64,19 @@
 
 #define ANGLE_GAIN					0.7
 
+/* STRING SHORTENING */
+#define _0 		0b0000
+#define _1 		0b0001
+#define _2 		0b0010
+#define _3 		0b0011
+#define _4 		0b0100
+#define _5 		0b0101
+#define _6 		0b0110
+#define _7 		0b0111
+#define _8 		0b1000
+#define _9 		0b1001
+#define _dot 	0b1010
+#define _neg	0b1011
+#define _end	0b1100
+
 #endif /* SRC_DEFINITIONS_H_ */
