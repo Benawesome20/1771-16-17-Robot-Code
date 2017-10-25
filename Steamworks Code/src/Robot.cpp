@@ -217,6 +217,7 @@ public:
 		SmartDashboard::PutString("DB/String 4", "Right Distance: " + std::to_string((int)bot.GetRightDistance()));
 		SmartDashboard::PutString("DB/String 5", "Avg Distance: " + std::to_string((int)bot.GetDistance()));
 		//SmartDashboard::PutString("DB/String 6", "Turret Rotation: " + std::to_string(balls.turret.GetAvgRotation()));
+		SmartDashboard::PutString("DB/String 6", "Left X: " + std::to_string(bot.GetX()));
 		SmartDashboard::PutString("DB/String 7", "Climb Current: " + std::to_string(balls.GetAvgClimbCurrent()));
 		SmartDashboard::PutString("DB/String 8", "NavX Abs Angle: " + std::to_string(bot.GetAbsoluteAngle()).substr(0,6));
 		SmartDashboard::PutString("DB/String 9", "NavX Raw Yaw: " + std::to_string(	bot.GetYaw()).substr(0,6));

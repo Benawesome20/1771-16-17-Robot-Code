@@ -1,0 +1,359 @@
+08:56:43 **** Incremental Build of configuration Debug for project Dalton Code ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\PROGRAMMING/wpilib/cpp/current/lib" "-LC:\\Users\\PROGRAMMING/wpilib/user/cpp/lib" -Wl,-rpath,/opt/GenICam_v3_0_NI/bin/Linux32_ARM,-rpath,/usr/local/frc/lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+src\Robot.o: In function `Climber::GetEncPosition()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Climber.h:50: undefined reference to `CANTalon::GetEncPosition() const'
+src\Robot.o: In function `Transmission::Set(double)':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:43: undefined reference to `CANTalon::Set(double)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:44: undefined reference to `CANTalon::Set(double)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:47: undefined reference to `CANTalon::Set(double)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:43: undefined reference to `CANTalon::Set(double)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:44: undefined reference to `CANTalon::Set(double)'
+src\Robot.o:C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:47: more undefined references to `CANTalon::Set(double)' follow
+src\Robot.o: In function `Transmission::~Transmission()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:14: undefined reference to `CANTalon::~CANTalon()'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:14: undefined reference to `CANTalon::~CANTalon()'
+src\Robot.o: In function `Turret::~Turret()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/Turret.h:18: undefined reference to `CANTalon::~CANTalon()'
+src\Robot.o: In function `Turret::~Turret()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:14: undefined reference to `CANTalon::~CANTalon()'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:14: undefined reference to `CANTalon::~CANTalon()'
+src\Robot.o:C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:14: more undefined references to `CANTalon::~CANTalon()' follow
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:33: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:33: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:33: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:33: undefined reference to `CANTalon::~CANTalon()'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:33: undefined reference to `CANTalon::~CANTalon()'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:33: undefined reference to `CANTalon::CANTalon(int)'
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/RoboBase.h:42: undefined reference to `CANTalon::~CANTalon()'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/RoboBase.h:42: undefined reference to `CANTalon::~CANTalon()'
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:25: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:25: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:25: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:25: undefined reference to `CANTalon::~CANTalon()'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:25: undefined reference to `CANTalon::~CANTalon()'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:25: undefined reference to `CANTalon::CANTalon(int)'
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/Turret.h:27: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/Turret.h:27: undefined reference to `CANTalon::~CANTalon()'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/Turret.h:27: undefined reference to `CANTalon::~CANTalon()'
+src\Robot.o: In function `Transmission::ConfigNeutralMode(frc::CANSpeedController::NeutralMode)':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Transmission.h:52: undefined reference to `CANTalon::ConfigNeutralMode(frc::CANSpeedController::NeutralMode)'
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/Intake.h:18: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/Intake.h:18: undefined reference to `CANTalon::~CANTalon()'
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Climber.h:23: undefined reference to `CANTalon::CANTalon(int)'
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Climber.h:26: undefined reference to `CANTalon::ConfigNeutralMode(frc::CANSpeedController::NeutralMode)'
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/Balls.h:30: undefined reference to `CANTalon::~CANTalon()'
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\src/Climber.h:17: undefined reference to `CANTalon::~CANTalon()'
+src\Robot.o: In function `Robot::Robot()':
+C:\Users\PROGRAMMING\Google Drive\2016-2017\Robot Code\1771-16-17-Robot-Code\Dalton Code\Debug/..\src/Intake.h:14: undefined reference to `CANTalon::~CANTalon()'
+collect2.exe: error: ld returned 1 exit status
+08:56:58 **** Incremental Build of configuration Debug for project Dalton Code ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\PROGRAMMING/wpilib/cpp/current/lib" "-LC:\\Users\\PROGRAMMING/wpilib/user/cpp/lib" -Wl,-rpath,/opt/GenICam_v3_0_NI/bin/Linux32_ARM -o FRCUserProgram "src\\Robot.o" -lCTRLib -lwpi 
+Info: Nothing to build for Dalton Code
+08:57:00 **** Incremental Build of configuration Debug for project Steamworks Code ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\PROGRAMMING/wpilib/cpp/current/include" "-IC:\\Users\\PROGRAMMING\\Google Drive\\2016-2017\\Robot Code\\1771-16-17-Robot-Code\\Steamworks Code\\src" "-IC:\\Users\\PROGRAMMING/wpilib/user/cpp/include" "-IC:\\wpilib\\user\\cpp\\" "-IC:\\navx-mxp\\cpp" -O0 -Og -g3 -Wall -c -fmessage-length=0 -o "src\\ROBOT AUTO HEADERS\\Point.o" "..\\src\\ROBOT AUTO HEADERS\\Point.cpp" 
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:26:10: warning: class 'Point' is implicitly friends with itself
+   friend Point;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:10:37: error: only declarations of constructors can be 'explicit'
+ explicit Point::Point(const Point& p){
+                                     ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In copy constructor 'Point::Point(const Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:11:7: error: lvalue required as left operand of assignment
+  this = &p;
+       ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: At global scope:
+..\src\ROBOT AUTO HEADERS\Point.cpp:14:1: error: prototype for 'Point::Point(double, double, Point::CoordinateType)' does not match any in class 'Point'
+ Point::Point(double a, double b, CoordinateType ct = Cart){
+ ^
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: error: candidates are: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:10:10: error:                 Point::Point(const Point&)
+ explicit Point::Point(const Point& p){
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:55:10: error: no matching function for call to 'Point::Point(Point&)'
+  return *this;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:55:10: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:59:57: error: no matching function for call to 'Point::Point(Point)'
+  return Point(p.x + this->x,p.y + this->y, p.z + this->z);
+                                                         ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:59:57: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:63:7: error: lvalue required as left operand of assignment
+  this = new Point(p.x + this->x,p.y + this->y, p.z + this->z);
+       ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:64:10: error: no matching function for call to 'Point::Point(Point&)'
+  return *this;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:64:10: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'void Point::UpdatePolar()':
+..\src\ROBOT AUTO HEADERS\Point.cpp:68:20: error: 'sqrt' was not declared in this scope
+  r = sqrt(x*x + z*z);
+                    ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:69:14: error: 'atan' was not declared in this scope
+  t = atan(z/x);
+              ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'void Point::UpdateCartesian()':
+..\src\ROBOT AUTO HEADERS\Point.cpp:73:15: error: 'cos' was not declared in this scope
+  x = r * cos(t);
+               ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:74:15: error: 'sin' was not declared in this scope
+  z = r * sin(t);
+               ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:56:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:60:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:65:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+08:59:00 **** Incremental Build of configuration Debug for project Dalton Code ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\PROGRAMMING/wpilib/cpp/current/lib" "-LC:\\Users\\PROGRAMMING/wpilib/user/cpp/lib" -Wl,-rpath,/opt/GenICam_v3_0_NI/bin/Linux32_ARM -o FRCUserProgram "src\\Robot.o" -lCTRLib -lwpi 
+Info: Nothing to build for Dalton Code
+08:59:01 **** Incremental Build of configuration Debug for project Steamworks Code ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\PROGRAMMING/wpilib/cpp/current/include" "-IC:\\Users\\PROGRAMMING\\Google Drive\\2016-2017\\Robot Code\\1771-16-17-Robot-Code\\Steamworks Code\\src" "-IC:\\Users\\PROGRAMMING/wpilib/user/cpp/include" "-IC:\\wpilib\\user\\cpp\\" "-IC:\\navx-mxp\\cpp" -O0 -Og -g3 -Wall -c -fmessage-length=0 -o "src\\ROBOT AUTO HEADERS\\Vector3.o" "..\\src\\ROBOT AUTO HEADERS\\Vector3.cpp" 
+In file included from ..\src\ROBOT AUTO HEADERS\Vector3.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Vector3.hpp:1:21: warning: extra tokens at end of #include directive
+ #include "Point.hpp";
+                     ^
+In file included from ..\src\ROBOT AUTO HEADERS\Vector3.hpp:1:0,
+                 from ..\src\ROBOT AUTO HEADERS\Vector3.cpp:8:
+..\src\ROBOT AUTO HEADERS\Point.hpp:26:10: warning: class 'Point' is implicitly friends with itself
+   friend Point;
+          ^
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\PROGRAMMING/wpilib/cpp/current/include" "-IC:\\Users\\PROGRAMMING\\Google Drive\\2016-2017\\Robot Code\\1771-16-17-Robot-Code\\Steamworks Code\\src" "-IC:\\Users\\PROGRAMMING/wpilib/user/cpp/include" "-IC:\\wpilib\\user\\cpp\\" "-IC:\\navx-mxp\\cpp" -O0 -Og -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+In file included from ..\src\Robot.cpp:19:0:
+..\src\RoboBase.h: In constructor 'RoboBase::RoboBase(int, int, int, int, int, int, int, int, int, int, int, int, int)':
+..\src\RoboBase.h:30:10: warning: 'RoboBase::boiler_cam' will be initialized after [-Wreorder]
+  PixyI2C boiler_cam;
+          ^
+..\src\RoboBase.h:25:28: warning:   'frc::BuiltInAccelerometer RoboBase::acc' [-Wreorder]
+  frc::BuiltInAccelerometer acc;
+                            ^
+..\src\RoboBase.h:43:2: warning:   when initialized here [-Wreorder]
+  RoboBase(int lmotor_port,int lmotor_port2, int rmotor_port, int rmotor_port2,
+  ^
+..\src\RoboBase.h: In member function 'void RoboBase::TankDrive()':
+..\src\RoboBase.h:101:11: warning: unused variable 'r_ratio' [-Wunused-variable]
+    double r_ratio = 1;
+           ^
+..\src\RoboBase.h:102:11: warning: unused variable 'l_ratio' [-Wunused-variable]
+    double l_ratio = 1 - -l_stick.GetX();
+           ^
+In file included from ..\src\Robot.cpp:22:0:
+..\src\Cartesian.h: At global scope:
+..\src\Cartesian.h:72:12: warning: class 'Point' is implicitly friends with itself
+     friend Point;
+            ^
+..\src\Robot.cpp: In member function 'std::string Robot::small_str(std::string)':
+..\src\Robot.cpp:242:9: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+    if(c & 0xF0 == 0xF0){ //Low Nibble
+         ^
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\PROGRAMMING/wpilib/cpp/current/include" "-IC:\\Users\\PROGRAMMING\\Google Drive\\2016-2017\\Robot Code\\1771-16-17-Robot-Code\\Steamworks Code\\src" "-IC:\\Users\\PROGRAMMING/wpilib/user/cpp/include" "-IC:\\wpilib\\user\\cpp\\" "-IC:\\navx-mxp\\cpp" -O0 -Og -g3 -Wall -c -fmessage-length=0 -o "src\\ROBOT AUTO HEADERS\\Point.o" "..\\src\\ROBOT AUTO HEADERS\\Point.cpp" 
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:26:10: warning: class 'Point' is implicitly friends with itself
+   friend Point;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:10:37: error: only declarations of constructors can be 'explicit'
+ explicit Point::Point(const Point& p){
+                                     ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In copy constructor 'Point::Point(const Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:11:7: error: lvalue required as left operand of assignment
+  this = &p;
+       ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: At global scope:
+..\src\ROBOT AUTO HEADERS\Point.cpp:14:1: error: prototype for 'Point::Point(double, double, Point::CoordinateType)' does not match any in class 'Point'
+ Point::Point(double a, double b, CoordinateType ct = Cart){
+ ^
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: error: candidates are: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:10:10: error:                 Point::Point(const Point&)
+ explicit Point::Point(const Point& p){
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:55:10: error: no matching function for call to 'Point::Point(Point&)'
+  return *this;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:55:10: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:59:57: error: no matching function for call to 'Point::Point(Point)'
+  return Point(p.x + this->x,p.y + this->y, p.z + this->z);
+                                                         ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:59:57: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:63:7: error: lvalue required as left operand of assignment
+  this = new Point(p.x + this->x,p.y + this->y, p.z + this->z);
+       ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:64:10: error: no matching function for call to 'Point::Point(Point&)'
+  return *this;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:64:10: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'void Point::UpdatePolar()':
+..\src\ROBOT AUTO HEADERS\Point.cpp:68:20: error: 'sqrt' was not declared in this scope
+  r = sqrt(x*x + z*z);
+                    ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:69:14: error: 'atan' was not declared in this scope
+  t = atan(z/x);
+              ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'void Point::UpdateCartesian()':
+..\src\ROBOT AUTO HEADERS\Point.cpp:73:15: error: 'cos' was not declared in this scope
+  x = r * cos(t);
+               ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:74:15: error: 'sin' was not declared in this scope
+  z = r * sin(t);
+               ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:56:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:60:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:65:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+09:00:09 **** Incremental Build of configuration Debug for project Dalton Code ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\PROGRAMMING/wpilib/cpp/current/lib" "-LC:\\Users\\PROGRAMMING/wpilib/user/cpp/lib" -Wl,-rpath,/opt/GenICam_v3_0_NI/bin/Linux32_ARM -o FRCUserProgram "src\\Robot.o" -lCTRLib -lwpi 
+Info: Nothing to build for Dalton Code
+09:00:10 **** Incremental Build of configuration Debug for project Steamworks Code ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\PROGRAMMING/wpilib/cpp/current/include" "-IC:\\Users\\PROGRAMMING\\Google Drive\\2016-2017\\Robot Code\\1771-16-17-Robot-Code\\Steamworks Code\\src" "-IC:\\Users\\PROGRAMMING/wpilib/user/cpp/include" "-IC:\\wpilib\\user\\cpp\\" "-IC:\\navx-mxp\\cpp" -O0 -Og -g3 -Wall -c -fmessage-length=0 -o "src\\ROBOT AUTO HEADERS\\Point.o" "..\\src\\ROBOT AUTO HEADERS\\Point.cpp" 
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:26:10: warning: class 'Point' is implicitly friends with itself
+   friend Point;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:10:37: error: only declarations of constructors can be 'explicit'
+ explicit Point::Point(const Point& p){
+                                     ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In copy constructor 'Point::Point(const Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:11:7: error: lvalue required as left operand of assignment
+  this = &p;
+       ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: At global scope:
+..\src\ROBOT AUTO HEADERS\Point.cpp:14:1: error: prototype for 'Point::Point(double, double, Point::CoordinateType)' does not match any in class 'Point'
+ Point::Point(double a, double b, CoordinateType ct = Cart){
+ ^
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: error: candidates are: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:10:10: error:                 Point::Point(const Point&)
+ explicit Point::Point(const Point& p){
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:55:10: error: no matching function for call to 'Point::Point(Point&)'
+  return *this;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:55:10: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:59:57: error: no matching function for call to 'Point::Point(Point)'
+  return Point(p.x + this->x,p.y + this->y, p.z + this->z);
+                                                         ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:59:57: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:63:7: error: lvalue required as left operand of assignment
+  this = new Point(p.x + this->x,p.y + this->y, p.z + this->z);
+       ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:64:10: error: no matching function for call to 'Point::Point(Point&)'
+  return *this;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:64:10: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'void Point::UpdatePolar()':
+..\src\ROBOT AUTO HEADERS\Point.cpp:68:20: error: 'sqrt' was not declared in this scope
+  r = sqrt(x*x + z*z);
+                    ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:69:14: error: 'atan' was not declared in this scope
+  t = atan(z/x);
+              ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'void Point::UpdateCartesian()':
+..\src\ROBOT AUTO HEADERS\Point.cpp:73:15: error: 'cos' was not declared in this scope
+  x = r * cos(t);
+               ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:74:15: error: 'sin' was not declared in this scope
+  z = r * sin(t);
+               ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:56:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:60:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:65:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^

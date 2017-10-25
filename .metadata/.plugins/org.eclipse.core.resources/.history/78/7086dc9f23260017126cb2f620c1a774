@@ -1,0 +1,25 @@
+/*
+ * Point.cpp
+ *
+ *  Created on: Apr 20, 2017
+ *      Author: Justin DeSimpliciis
+ */
+
+#include "Point.hpp"
+
+Point::Point(double a, double b, CoordinateType ct = Cart){
+	this->x = x;
+	this->z = z;
+
+	if(ct == Polar){
+		r = a;
+		t = b;
+		UpdateCartesian();
+	}else if(ct == Cart){
+		x = a;
+		z = b;
+		UpdatePolar();
+	}
+}
+
+

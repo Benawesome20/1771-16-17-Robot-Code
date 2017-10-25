@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Steamworks Code/src/Climb.h&apos; to &apos;climber.h&apos;" description="Rename resource &apos;Climb.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Climb.h" name="climber.h" stamp="1489101301345" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Steamworks Code/src/climber.h&apos; to &apos;Climber.h&apos;" description="Rename resource &apos;climber.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/climber.h" name="Climber.h" stamp="1489101314113" updateReferences="true"/>
+</session>

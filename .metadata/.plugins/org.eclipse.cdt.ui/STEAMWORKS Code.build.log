@@ -1,0 +1,87 @@
+09:00:10 **** Incremental Build of configuration Debug for project Steamworks Code ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\PROGRAMMING/wpilib/cpp/current/include" "-IC:\\Users\\PROGRAMMING\\Google Drive\\2016-2017\\Robot Code\\1771-16-17-Robot-Code\\Steamworks Code\\src" "-IC:\\Users\\PROGRAMMING/wpilib/user/cpp/include" "-IC:\\wpilib\\user\\cpp\\" "-IC:\\navx-mxp\\cpp" -O0 -Og -g3 -Wall -c -fmessage-length=0 -o "src\\ROBOT AUTO HEADERS\\Point.o" "..\\src\\ROBOT AUTO HEADERS\\Point.cpp" 
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:26:10: warning: class 'Point' is implicitly friends with itself
+   friend Point;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:10:37: error: only declarations of constructors can be 'explicit'
+ explicit Point::Point(const Point& p){
+                                     ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In copy constructor 'Point::Point(const Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:11:7: error: lvalue required as left operand of assignment
+  this = &p;
+       ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: At global scope:
+..\src\ROBOT AUTO HEADERS\Point.cpp:14:1: error: prototype for 'Point::Point(double, double, Point::CoordinateType)' does not match any in class 'Point'
+ Point::Point(double a, double b, CoordinateType ct = Cart){
+ ^
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: error: candidates are: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:10:10: error:                 Point::Point(const Point&)
+ explicit Point::Point(const Point& p){
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:55:10: error: no matching function for call to 'Point::Point(Point&)'
+  return *this;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:55:10: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:59:57: error: no matching function for call to 'Point::Point(Point)'
+  return Point(p.x + this->x,p.y + this->y, p.z + this->z);
+                                                         ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:59:57: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:63:7: error: lvalue required as left operand of assignment
+  this = new Point(p.x + this->x,p.y + this->y, p.z + this->z);
+       ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:64:10: error: no matching function for call to 'Point::Point(Point&)'
+  return *this;
+          ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:64:10: note: candidate is:
+In file included from ..\src\ROBOT AUTO HEADERS\Point.cpp:8:0:
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note: Point::Point(double, double, double, Point::CoordinateType)
+   Point(double a, double b, double c, CoordinateType ct = Cart);
+   ^
+..\src\ROBOT AUTO HEADERS\Point.hpp:23:3: note:   candidate expects 4 arguments, 1 provided
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'void Point::UpdatePolar()':
+..\src\ROBOT AUTO HEADERS\Point.cpp:68:20: error: 'sqrt' was not declared in this scope
+  r = sqrt(x*x + z*z);
+                    ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:69:14: error: 'atan' was not declared in this scope
+  t = atan(z/x);
+              ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'void Point::UpdateCartesian()':
+..\src\ROBOT AUTO HEADERS\Point.cpp:73:15: error: 'cos' was not declared in this scope
+  x = r * cos(t);
+               ^
+..\src\ROBOT AUTO HEADERS\Point.cpp:74:15: error: 'sin' was not declared in this scope
+  z = r * sin(t);
+               ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:56:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:60:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\src\ROBOT AUTO HEADERS\Point.cpp: In member function 'Point Point::operator+=(Point&)':
+..\src\ROBOT AUTO HEADERS\Point.cpp:65:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+
+09:00:10 Build Finished (took 194ms)
+

@@ -1,0 +1,7 @@
+16:21:08 **** Rebuild of configuration Debug for project Arcade Drive ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\PROGRAMMING/wpilib/cpp/current/include" "-IC:\\Users\\PROGRAMMING\\Google Drive\\2016-2017\\Robot Code\\1771-16-17-Robot-Code\\Arcade Drive\\src" "-IC:\\Users\\PROGRAMMING/wpilib/user/cpp/include" -O0 -Og -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\PROGRAMMING/wpilib/cpp/current/lib" "-LC:\\Users\\PROGRAMMING/wpilib/user/cpp/lib" -Wl,-rpath,/opt/GenICam_v3_0_NI/bin/Linux32_ARM -o FRCUserProgram "src\\Robot.o" -lCTRLib -lwpi 
+
+16:21:11 Build Finished (took 3s.637ms)
+

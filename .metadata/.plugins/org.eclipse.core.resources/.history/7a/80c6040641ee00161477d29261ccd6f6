@@ -1,0 +1,53 @@
+/*
+ * Transmission.h
+ *
+ *  Created on: January 21, 2017
+ *      Author: Benjamin Ventimiglia
+ */
+
+#ifndef SRC_TRANSMISSION_H_
+#define SRC_TRANSMISSION_H_
+
+#include <iostream>
+#include <memory>
+#include <string>
+
+#include <WPILib.h>
+#include <CANTalon.h>
+
+class Transmission {
+	/* Objects for class use */
+	CANTalon motor;
+	Encoder encoder;
+
+public:
+	/* Initialize the class objects */
+	Transmission(int motor_port, int encoder_channel1, int encoder_channel2):
+		motor(motor_port),
+		encoder(encoder_channel1, encoder_channel2)
+	{
+	}
+
+	/* Sets the speed of the motor */
+	void Set(double rate) {
+		//motor.Set(rate);
+	}
+
+	/* Resets the encoder value */
+	void Reset() {
+		encoder.Reset();
+	}
+
+	/* Gets the distance driven by the motor */
+	double GetDistance() {
+		return encoder.GetDistance();
+	}
+
+	/* Gets the speed of the motor */
+	double GetSpeed() {
+		return encoder.GetRate();
+	}
+
+};
+
+#endif /* SRC_TRANSMISSION_H_ */

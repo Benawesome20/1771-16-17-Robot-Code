@@ -1,0 +1,34 @@
+/*
+ * Climb.h
+ *
+ *  Created on: Mar 9, 2017
+ *      Author: PROGRAMMING
+ */
+
+#ifndef SRC_CLIMB_H_
+#define SRC_CLIMB_H_
+
+#include <WPILib.h>
+#include <CANTalon.h>
+
+#include "Definitions.h"
+#include "Transmission.h"
+
+class Climb {
+	Transmission climb_motor;
+	double startingDist;
+
+public:
+	Climb(int climb_motor_port, int cencoder_1, int cencoder_2):
+		climb_motor(climb_motor_port, cencoder_1, cencoder_2)
+	{
+		climb_motor.ConfigNeutralMode(CANTalon::kNeutralMode_Brake);
+	}
+
+	void ClimbUp(int distance){
+
+	}
+};
+
+
+#endif /* SRC_CLIMB_H_ */

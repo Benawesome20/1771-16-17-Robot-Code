@@ -88,8 +88,27 @@ public:
 
 	/* Basic tank drive */
 	void TankDrive() {
-		l_motor.Set(GetLeftYAxis());
-		r_motor.Set(-GetRightYAxis());
+		/*l_motor.Set(GetLeftYAxis());
+		r_motor.Set(-GetRightYAxis());*/
+
+		double speed = GetLeftYAxis();
+
+		double l_ratio = 1;
+		double r_ratio = 1 - l_stick.GetX();
+
+		if(l_stick.GetX() < 0)
+		{
+			double r_ratio = 1;
+			double l_ratio = 1 - -l_stick.GetX();
+		}
+
+		l_motor.Set(speed * l_ratio);
+		r_motor.Set(-speed * r_ratio);
+	}
+
+	double GetX()
+	{
+		return l_stick.GetX();
 	}
 
 	/* Automatically shifts gears based on average speed of motors */

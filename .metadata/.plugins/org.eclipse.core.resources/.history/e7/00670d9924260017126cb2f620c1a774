@@ -1,0 +1,59 @@
+/*
+ * Point.cpp
+ *
+ *  Created on: Apr 20, 2017
+ *      Author: Justin DeSimpliciis
+ */
+
+#include "Point.hpp"
+
+explicit Point::Point(const Point& p){
+	this = (*p);
+}
+
+Point::Point(double a, double b, CoordinateType ct = Cart){
+	this->x = x;
+	this->z = z;
+
+	if(ct == Polar){
+		r = a;
+		t = b;
+		UpdateCartesian();
+	}else if(ct == Cart){
+		x = a;
+		z = b;
+		UpdatePolar();
+	}
+}
+
+double Point::GetX(){
+	return x;
+}
+
+double Point::GetZ(){
+	return z;
+}
+
+double Point::GetR(){
+	return r;
+}
+
+double Point::GetTheta(){
+	return t;
+}
+
+Point Point::operator=(Point& p){
+	x = p.x;
+	z = p.z;
+	r = p.r;
+	t = p.t;
+	return *this;
+}
+
+Point Point::operator+(Point& p){
+	return Point(p.x + this->x, p.z + this->z);
+}
+
+Point Point::operator+=(Point& p){
+	this = new Point(p.x + this->x, p.z + this->z);
+}

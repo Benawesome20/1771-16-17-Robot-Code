@@ -71,7 +71,8 @@ public:
 
 	void ManualClimb()
 	{
-		c_motor.ManualClimb(-fabs(t_stick.GetY())); // figure out actual stick to use
+		//c_motor.ManualClimb(-fabs(t_stick.GetY()));
+		c_motor.ManualClimb(t_stick.GetY());
 	}
 
 	/*double GetClimbEncoder()

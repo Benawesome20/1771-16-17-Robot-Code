@@ -15,15 +15,16 @@ class Point {
 		double GetR();
 		double GetTheta();
 		
-		Point operator=(Point p);
-		Point operator+(Point p);
-		Point operator+=(Point p);
+		Point operator=(Point&);
+		Point operator+(Point&);
+		Point operator+=(Point&);
 		
-		explicit Point::Point(Point p);
-		Point::Point(double a, double b, CoordinateType ct = Cart);
+		explicit Point(const Point&);
+		Point(double a, double b, double c, CoordinateType ct = Cart);
 		
 	protected:
-		double x,y,z,r,theta;
+		friend Point;
+		double x,y,z,r,t;
 		void UpdatePolar();
 		void UpdateCartesian();
 };

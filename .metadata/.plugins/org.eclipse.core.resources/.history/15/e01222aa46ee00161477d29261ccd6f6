@@ -1,0 +1,35 @@
+/*
+ * Pixy.h
+ *
+ *  Created on: February 8, 2017
+ *      Author: Benjamin Ventimiglia
+ */
+
+#ifndef SRC_PIXY_H_
+#define SRC_PIXY_H_
+
+#include <WPILib.h>
+#include <CANTalon.h>
+
+class Pixy {
+	AnalogInput detect;
+	AnalogInput offset;
+
+public:
+	Pixy():
+		detect(1),
+		offset(3)
+	{
+	}
+
+	double GetOffset() {
+		if (detect.Get())
+		{
+			return ((double)offset.Get() - (3.3/2.0) ) * 100.0;
+		}
+		else
+			return
+	}
+
+};
+#endif /* SRC_PIXY_H_ */
