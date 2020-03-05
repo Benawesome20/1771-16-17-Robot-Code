@@ -9,7 +9,7 @@
 #define SRC_DEFINITIONS_H_
 
 #define SHIFT_UP_SPEED 3100 				//Encoder speed(rate) limits for shifting gears
-#define SHIFT_DOWN_SPEED 25250
+#define SHIFT_DOWN_SPEED 30250
 
 #define L_MOTOR_PORT_1 1					//Left motor port 1
 #define L_MOTOR_PORT_2 2					//Left motor port 2
